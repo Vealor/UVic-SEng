@@ -1,0 +1,149 @@
+%/////////////////////////////////////////////////////////%
+%//						PREAMBLE						//%
+%/////////////////////////////////////////////////////////%
+\documentclass[11pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%       Packages
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Fonts and Symbols
+\usepackage{
+    amsmath,            % math operators
+    amssymb,            % math symbols
+    textcomp,           % Copyright and Registered symbols
+    pifont,             % Includes the pretty cirled numbers
+    stmaryrd,			% Arrows
+    CJK,				% special characters (Japanese, Russian, etc...)
+}
+%% Graphics
+\usepackage{
+    graphicx,           % allows insertion of images
+    subfigure,          % allows subfigures (a), (b), etc.
+    tikz,				% allows drawing shapes and whatnot
+}                
+\graphicspath{ {graphics/} }    % (graphicx) relative path to graphics folder    
+%% Tables
+\usepackage{
+    booktabs,           % better tables, discourages vertical rulings
+    multicol,           % allow multi columns
+    tabularx,           % variable-width columns
+}
+%% Layout Alteration
+\usepackage{            
+    geometry,           % change the margins for specific PAGES
+    parskip,            % no indenting on paras with a line between paras
+    fancyhdr,           % fancy headers and footers
+    framed,				% nice boxes; used in Supervisor's Approval
+    enumitem,			% indented items for glossary
+}
+\setlist[description]{style=nextline}
+\geometry{              % specify page size options for (geometry)
+    a4paper, 			% paper size
+    margin=1in,			% specified independently with hmargin vmargin
+}
+%% Units
+\usepackage{
+    siunitx,             % has S (decimal align) column type
+}
+\sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
+    group-digits  = false, % no grouping of digits
+    %         load-configurations = abbreviations,
+    %         per-mode = symbol,
+}
+%% Misc
+\usepackage{
+    pdfpages,            % import pdfs into this document
+    url,                % allows urls to be added to document
+    wrapfig,
+}
+%% Bibliography
+%% --------------------------
+\usepackage[
+	backend=biber,
+	style=ieee]
+{biblatex}
+\addbibresource{wt1.bib}
+%%%%%%%%%%%%%%%%%%%%%%%
+% Macros and Commands
+%%%%%%%%%%%%%%%%%%%%%%%
+\providecommand{\textcol}[1]{\multicolumn{1}{c}{#1}}	% override S column type with centered text column
+\providecommand{\blankline}[1]{\rule{#1}{0.5pt}}		% provides a place to write on documents; like __________________ that
+\providecommand{\StartAppendices}{						% Set up page numbering for appendices as (Appendix Letter) - (Page Number)
+    \newpage
+    \newcounter{AppendixCounter}
+    \renewcommand{\thepage}{\Alph{AppendixCounter} \textendash\ \arabic{page}}
+}
+\providecommand{\Appendix}[1]{							% Manually construct the section title for each appendix and then add an entry to the ToC
+    \newpage
+    \stepcounter{AppendixCounter}
+    \setcounter{page}{1}
+    \section*{Appendix \Alph{AppendixCounter}\quad #1}
+    \addtocontents{toc}{\protect\contentsline{section}	% \protect preserves the spacing in the ToC
+    	{Appendix \Alph{AppendixCounter}\quad #1}{}}
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+% 	Environments
+%%%%%%%%%%%%%%%%%%%%%%%
+% Hides the formatting for the summary
+\newenvironment{Summary}{
+	\addcontentsline{toc}{section}{Summary}
+	\section*{Summary}
+}{}
+% Hides the formatting for the glossary
+\newenvironment{Glossary}{
+	\addcontentsline{toc}{section}{Glossary}
+	\section*{Glossary}
+}{}
+%/////////////////////////////////////////////////////////%
+%//						BODY							//%
+%/////////////////////////////////////////////////////////%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%
+% 	  Title Page
+%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{gobble}		% turn off page numbering
+\include{assets/titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%
+% 	  Preamble
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Letter of Transmittal
+\newpage
+\includepdf{assets/letter_of_transmittal.pdf}
+%%%%%% Table of Contents
+\newpage
+\addtocontents{toc}{~\hfill\textbf{Page}\par}	% 'Page' above the page numbers
+\tableofcontents
+%%%%%% List of Figures
+\newpage
+\pagenumbering{roman}	% i, ii, iii, ... page numbering
+%\addcontentsline{toc}{section}{\listfigurename}	% manually add to toc
+%\addtocontents{lof}{~\hfill\textbf{Page}\par}
+%\listoffigures
+%%%%%% List of Tables
+%\newpage				% LoF and LoT may be on the same page if they fit
+%\addcontentsline{toc}{section}{\listtablename}
+%\addtocontents{lot}{~\hfill\textbf{Page}\par}
+%\listoftables
+%%%%%% Summary
+%\newpage
+\include{assets/summary}
+%%%%%% Glossary
+\newpage
+\include{assets/glossary}
+%%%%%%%%%%%%%%%%%%%%%%%
+% 	  Main Body
+%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\pagenumbering{arabic}	% 1, 2, 3, ... page numbering
+\include{assets/body} % consider using one file per section in the body
+%%%%%%%%%%%%%%%%%%%%%%%
+% 	  Ref & Appendix
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% References
+\newpage
+\renewcommand*{\UrlFont}{\rmfamily} % preserve default font for URLs
+\printbibliography[heading=bibintoc,title={References}]
+%%%%%% Appendicies
+%\StartAppendices{}
+%\include{assets/appendix}
+\end{document}
