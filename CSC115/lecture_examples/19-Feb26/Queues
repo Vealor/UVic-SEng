@@ -1,0 +1,14 @@
+/* Queues */
+First in First out (FIFO)
+
+enqueue -> add an element to the queue
+dequeue -> remove and return the first element
+isEmpty -> is the queue empty?
+
+enqueue bob
+enqueue jane
+enqueue joe
+enqueue susan
+Line: 	bob	jane	joe	susan
+dequeue bob
+Line:	jane	joe	susan

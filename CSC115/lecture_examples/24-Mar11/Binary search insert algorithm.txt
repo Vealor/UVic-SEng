@@ -1,0 +1,14 @@
+/* Binary Search insert algorithm */
+
+class BinarySearchTree{
+	TreeNode root;
+	
+	public int height(){
+		return height(root);
+	
+		int height(TreeNode n){
+			if(n==null) return 0;
+			int lh  height(n.left);
+			int rh = height(n.right);
+			if (lh>rh) return 1+lh;
+			else return 1+rh;

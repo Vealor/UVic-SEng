@@ -1,0 +1,16 @@
+/* Traversals */
+-visit every node in a tree
+	-O(N)
+-Three types:
+	pre-order
+	in-order
+	post-order
+	
+	traverse (TreeNode n){
+		if (n==null) return;
+		//pre-order happens here!
+		traverse (n.left);
+		//in-order happens here!
+		traverse (n.right);
+		//post-order happens here!
+	}

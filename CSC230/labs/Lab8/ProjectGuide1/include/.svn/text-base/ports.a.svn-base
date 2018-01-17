@@ -1,0 +1,27 @@
+
+
+	@I/O PORT
+	.equ		rPCONA,		0x1d20000
+	.equ		rPDATA,		0x1d20004
+	.equ		rPCONB,		0x1d20008
+	.equ		rPDATB,		0x1d2000c
+	.equ		rPCONC,		0x1d20010
+	.equ		rPDATC,		0x1d20014
+	.equ		rPUPC,		0x1d20018
+	.equ		rPCOND,		0x1d2001c
+	.equ		rPDATD,		0x1d20020
+	.equ		rPUPD,		0x1d20024
+	.equ		rPCONE,		0x1d20028
+	.equ		rPDATE,		0x1d2002c
+	.equ		rPUPE,		0x1d20030
+	.equ		rPCONF,		0x1d20034
+	.equ		rPDATF,		0x1d20038
+	.equ		rPUPF,		0x1d2003c
+
+	.equ		rPCONG,		0x1d20040
+	.equ		rPDATG,		0x1d20044
+	.equ		rPUPG,		0x1d20048
+	.equ		rSPUCR,		0x1d2004c
+
+	.extern		ports_init
+

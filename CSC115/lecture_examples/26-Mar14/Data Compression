@@ -1,0 +1,26 @@
+/* DATA COMPRESSION */
+
+RGB -> 8
+1024x768 x3 (colours)
+
+so for 1 hour, x60x60x60
+= 508,607,936,000 bytes
+
+474GB
+
+
+/// corless offers a 4th year course in data compression
+
+A - 00		//
+B - 01		// 2 bits
+C - 10		//
+D - 11		//
+
+A - 100 times
+B - 20 times
+C - 10 times
+D - 5 times
+Total 135 times
+
+all x2 bits
+therefore total of 270 bits!

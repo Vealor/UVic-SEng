@@ -1,0 +1,43 @@
+/*  An Interface is a way of defining expected behaviour witout
+ *  specifying any implementation details.
+ *
+ *  implementing the "is-A" relationship
+ *  an interface can be considered "something" instead of just being classified
+ *  as a reference to an object.
+ *  
+ *  
+ *  
+ *  
+ *  
+ *  
+ */
+ 
+/* eg:
+ * public interface Drawable
+ * {
+ * 	void draw (Surface s)
+ *	{
+ *	
+ *	}
+ * }
+ *
+ * public class ragon implements Drawable
+ * {
+ * 	void draw(Surface s)
+ * 	{
+ * 	
+ * 	}
+ * }
+ * 
+ * in conjunction with using the code
+ * Drawable l = new Square
+ * {
+ * 	l.draw(s);
+ * }
+ * 
+ * or something like
+ * Square s - new Square();
+ * Drawable d = s;
+ * 
+ * 
+ */

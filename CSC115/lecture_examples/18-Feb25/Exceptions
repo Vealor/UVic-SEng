@@ -1,0 +1,38 @@
+/* Exceptions */
+
+
+//for a rocket
+
+if (checkFuel()){
+	if (checkControl()){
+		lightEngine();
+	}
+	else
+	{
+		----
+	}
+}
+else
+{
+	---
+}
+////BUT with exceptions:
+try
+{
+	checkFuel();
+	checkControl();
+	----
+	----
+	---
+	---
+	lightEngine();
+}
+catch (______) //if nothing wrong in try, this doesn't run
+{
+	//goes here if something went wrong in try
+
+
+
+{
+
+

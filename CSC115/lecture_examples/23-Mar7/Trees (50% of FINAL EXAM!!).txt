@@ -1,0 +1,44 @@
+/* Trees */
+MUST USE TEXTBOOK
+
+Focus for now on binary trees
+	A binary tree is a tree such that for all nodes in the tree, each node
+	has at most two children.
+	
+	A leaf is a node with no children.
+	An internal node has parents and children.
+	Root is a "special" internal node.
+		The Root can be a leaf if there is only the Root in the tree.
+	Very important to disinguish between:
+		-Binary Tree
+		-Binary Search Tree
+		-Heap
+	
+	Height of the tree:
+		The number of nodes on the path from the root 
+		to the deepest node.
+	
+	The depth of a node:
+		the number of nodes on the path from the node to the root.
+		
+=> FULL BINARY TREE
+	-If T is empty, T is a full binary tree of height 0
+	-If T is not empty and has height H>0, then T is a full binary tree if
+	 its roots' subtrees are both full binary trees of height h-1
+	 
+	The number of nodes in A FULL tree is:
+		N = 2^H -1
+	
+=> COMPLETE BINARY TREE
+	-A binary tree of height H is a complete tree if:
+		-all nodes at depth h-2 and above have 2 children
+		-when a node at depth h-1 has children, all nodes to its left
+		 at the same level have two children
+		-when a node at depth h-1 has one child, it is a left child
+
+=> BINARY SEARCH TREE
+	-A binary tree
+	-for all nodes n in the tree:
+		-the value at n is greater than all nodes in the left subtree
+		AND
+		-the value at n is less than all nodes of n in the right subtree

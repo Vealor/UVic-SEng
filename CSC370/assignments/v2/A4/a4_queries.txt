@@ -1,0 +1,145 @@
+#########################################
+## Jakob Roberts - v00484900
+## CSC370
+## Assignment 4
+#########################################
+	
+####################################################################################
+1.
+WITH
+	sea    AS (SELECT episodeof,MAX(season) AS cseason,COUNT(episodeof) AS cepisodes FROM (episodes NATURAL JOIN ratings) WHERE rank IS NOT NULL GROUP BY episodeof),
+	resea  AS (SELECT id,rank,votes,episodeof FROM (sea NATURAL JOIN episodes NATURAL JOIN ratings)),
+	getrnk AS (SELECT episodeof,AVG(rank) AS arank FROM resea GROUP BY episodeof HAVING AVG(rank)>8),
+	getvts AS (SELECT episodeof,AVG(votes) AS avotes FROM resea GROUP BY episodeof HAVING AVG(votes) >= 1000)
+SELECT DISTINCT episodeof,arank,avotes,cepisodes,cseason FROM (sea NATURAL JOIN getrnk NATURAL JOIN getvts) WHERE cseason >= 4 ORDER BY arank DESC,avotes DESC;
+
+             episodeof             |      arank       |        avotes         | cepisodes | cseason 
+-----------------------------------+------------------+-----------------------+-----------+---------
+ "Person of Interest" (2011)       | 8.99186046511628 | 1168.7441860465116279 |        86 |       4
+ "House M.D." (2004)               | 8.68579545454546 | 1178.9659090909090909 |       176 |       8
+ "Supernatural" (2005)             | 8.65446009389671 | 1557.0000000000000000 |       213 |      10
+ "Lost" (2004)                     | 8.60762711864406 | 2280.9067796610169492 |       118 |       6
+ "Dexter" (2006)                   |          8.58125 | 2316.4895833333333333 |        96 |       8
+ "Prison Break" (2005)             | 8.58024691358024 | 1177.5308641975308642 |        81 |       4
+ "The Sopranos" (1999)             | 8.57674418604651 | 1673.6162790697674419 |        86 |       6
+ "Game of Thrones" (2011)          |           8.5275 | 9614.2250000000000000 |        40 |       4
+ "Friends" (1994)                  | 8.50635593220339 | 1089.3347457627118644 |       236 |      10
+ "The Walking Dead" (2010)         | 8.46119402985075 | 5075.4029850746268657 |        67 |       5
+ "Homeland" (2011)                 | 8.41041666666667 | 1670.0000000000000000 |        48 |       4
+ "Fringe" (2008)                   |            8.393 | 1049.4300000000000000 |       100 |       5
+ "Breaking Bad" (2008)             | 8.37903225806452 | 8616.6935483870967742 |        62 |       5
+ "Community" (2009)                | 8.35544554455445 | 1039.3267326732673267 |       101 |       6
+ "The Big Bang Theory" (2007)      | 8.14972067039107 | 1323.4189944134078212 |       179 |       8
+ "How I Met Your Mother" (2005)    | 8.12884615384615 | 1446.8846153846153846 |       208 |       9
+ "Buffy the Vampire Slayer" (1997) | 8.09103448275863 | 1138.9724137931034483 |       145 |       7
+ "South Park" (1997)               | 8.08560311284047 | 1079.7470817120622568 |       257 |      18
+ "American Horror Story" (2011)    | 8.06666666666667 | 1656.3137254901960784 |        51 |       4
+ "Doctor Who" (2005)               | 8.04887218045113 | 2421.2556390977443609 |       133 |       8
+ "The X Files" (1993)              | 8.03681592039801 | 1252.2985074626865672 |       201 |       9
+(21 rows)
+
+####################################################################################
+2.
+WITH
+	tit  AS (SELECT id,year,title FROM productions WHERE attr IS NULL),
+	main AS (SELECT title,year,rank,votes FROM (tit NATURAL JOIN ratings) WHERE votes >= 50000),
+	agr  AS (SELECT MAX(rank) AS rank FROM main),
+	thejoin AS (SELECT * FROM agr NATURAL JOIN main)
+SELECT title,year,rank,votes FROM thejoin;
+
+          title           | year | rank |  votes  
+--------------------------+------+------+---------
+ The Shawshank Redemption | 1994 |  9.3 | 1424596
+(1 row)
+
+####################################################################################
+3.
+WITH
+	mov    AS (SELECT * FROM (productions NATURAL JOIN ratings) WHERE attr IS NULL AND rank >=8 AND votes >=50000),
+	getpid AS (SELECT pid,rank FROM (roles NATURAL JOIN mov)),
+	getrnk AS (SELECT pid,AVG(rank) AS avg FROM getpid GROUP BY pid),
+	getcnt AS (SELECT pid,COUNT(pid) AS count FROM getpid GROUP BY pid)
+SELECT DISTINCT pid,count,avg FROM (getrnk NATURAL JOIN getcnt NATURAL JOIN getpid) WHERE count >=10 order by avg;
+
+        pid         | count |       avg        
+--------------------+-------+------------------
+ Tovey, Arthur      |    10 |             8.27
+ Lynn, Sherry (I)   |    11 | 8.27272727272727
+ Jackson, Samuel L. |    10 |             8.28
+ Ratzenberger, John |    11 | 8.29090909090909
+ Flowers, Bess      |    12 | 8.30833333333334
+ De Niro, Robert    |    10 |             8.36
+(6 rows)
+
+####################################################################################
+4.
+WITH
+	theid    AS (SELECT id FROM (productions NATURAL JOIN ratings) WHERE attr IS NULL AND votes >=50000 AND rank >=7.1),
+	thechar  AS (SELECT * FROM (theid NATURAL JOIN roles)),
+	thecount AS (SELECT pid,COUNT(pid) AS count FROM thechar GROUP BY pid),
+	themax   AS (SELECT MAX(count) AS count FROM thecount),
+	thejoin  AS (SELECT * FROM (themax NATURAL JOIN thecount))
+SELECT pid,id,billing,character FROM (thejoin NATURAL JOIN thechar) ORDER BY id;
+
+       pid       |                 id                 | billing |         character         
+-----------------+------------------------------------+---------+---------------------------
+ De Niro, Robert | A Bronx Tale (1993)                |       1 | Lorenzo
+ De Niro, Robert | American Hustle (2013)             |         | Victor Tellegio
+ De Niro, Robert | Angel Heart (1987)                 |       2 | Louis Cyphre
+ De Niro, Robert | Awakenings (1990)                  |       1 | Leonard Lowe
+ De Niro, Robert | Brazil (1985)                      |       2 | Harry Tuttle
+ De Niro, Robert | Cape Fear (1991)                   |       1 | Max Cady
+ De Niro, Robert | Casino (1995)                      |       1 | Sam 'Ace' Rothstein
+ De Niro, Robert | Fahrenheit 9/11 (2004)             |         | Himself
+ De Niro, Robert | Goodfellas (1990)                  |       1 | James Conway
+ De Niro, Robert | Heat (1995)                        |       2 | Neil McCauley
+ De Niro, Robert | Jackie Brown (1997)                |       6 | Louis Gara
+ De Niro, Robert | Limitless (2011/I)                 |       2 | Carl Van Loon
+ De Niro, Robert | Mean Streets (1973)                |       1 | Johnny Boy
+ De Niro, Robert | Men of Honor (2000)                |       1 | Master Chief Billy Sunday
+ De Niro, Robert | Once Upon a Time in America (1984) |       1 | David 'Noodles' Aaronson
+ De Niro, Robert | Raging Bull (1980)                 |       1 | Jake La Motta
+ De Niro, Robert | Ronin (1998)                       |       1 | Sam
+ De Niro, Robert | Silver Linings Playbook (2012)     |       3 | Pat Sr.
+ De Niro, Robert | Sleepers (1996)                    |       3 | Father Bobby
+ De Niro, Robert | Stardust (2007)                    |      34 | Captain Shakespeare
+ De Niro, Robert | Taxi Driver (1976)                 |      10 | Travis Bickle
+ De Niro, Robert | The Deer Hunter (1978)             |       1 | Michael
+ De Niro, Robert | The Godfather: Part II (1974)      |       4 | Vito Corleone
+ De Niro, Robert | The Untouchables (1987)            |       5 | Al Capone
+ De Niro, Robert | Wag the Dog (1997)                 |       2 | Conrad Brean
+(25 rows)
+
+####################################################################################
+5.
+WITH
+	good     AS (SELECT id FROM (ratings NATURAL JOIN productions) WHERE attr IS NULL AND votes >=50000),
+	direct   AS (SELECT pid,COUNT(pid) AS total FROM (productions NATURAL JOIN directors NATURAL JOIN ratings) WHERE attr IS NULL AND votes >=50000 GROUP BY pid HAVING COUNT(pid) >=10),
+	redirect AS (SELECT id,pid,total FROM (direct NATURAL JOIN directors NATURAL JOIN productions NATURAL JOIN good)),
+	regroup  AS (SELECT id,pid,total FROM (redirect NATURAL JOIN good NATURAL JOIN ratings) where rank >8),
+	getgood  AS (SELECT pid,COUNT(pid) AS goodones FROM regroup GROUP BY pid),
+	getperc  AS (SELECT pid,to_char(((goodones::real*100/total::real)), '990.0TH"%"') AS prop FROM (getgood NATURAL JOIN regroup)),
+	avggood  AS (SELECT pid,AVG(rank) AS avggoodones FROM (regroup NATURAL JOIN ratings) GROUP BY pid),
+	therest   AS (SELECT pid,(total-goodones) AS rest FROM (getgood NATURAL JOIN regroup)),
+	avrest   AS (SELECT pid,AVG(rank) AS avgrest FROM (redirect NATURAL JOIN ratings) WHERE id NOT IN (SELECT id FROM regroup) GROUP BY pid),
+	getdiff  AS (SELECT pid,(avggoodones-avgrest) AS diff FROM (avggood NATURAL JOIN avrest))
+SELECT DISTINCT pid,prop,total,goodones,TO_CHAR(avggoodones, '90.0TH') AS avggoodones,rest,TO_CHAR(avgrest, '90.0TH') AS avgrest,TO_CHAR(diff, '90.0TH') AS diff FROM (regroup NATURAL JOIN getperc NATURAL JOIN getgood NATURAL JOIN avggood NATURAL JOIN therest NATURAL JOIN avrest NATURAL JOIN getdiff) ORDER BY avgrest DESC,prop DESC,pid DESC;
+
+          pid          |  prop   | total | goodones | avggoodones | rest | avgrest | diff  
+-----------------------+---------+-------+----------+-------------+------+---------+-------
+ Hitchcock, Alfred (I) |   90.0% |    10 |        9 |   8.3       |    1 |   7.8   |   0.5
+ Kubrick, Stanley      |   72.7% |    11 |        8 |   8.3       |    3 |   7.7   |   0.7
+ Jackson, Peter (I)    |   30.0% |    10 |        3 |   8.8       |    7 |   7.5   |   1.3
+ Fincher, David        |   30.0% |    10 |        3 |   8.6       |    7 |   7.5   |   1.1
+ Tarantino, Quentin    |   54.5% |    11 |        6 |   8.4       |    5 |   7.4   |   1.0
+ Scorsese, Martin (I)  |   53.8% |    13 |        7 |   8.3       |    6 |   7.4   |   1.0
+ Eastwood, Clint       |   23.1% |    13 |        3 |   8.2       |   10 |   7.3   |   0.9
+ Spielberg, Steven     |   20.8% |    24 |        5 |   8.5       |   19 |   7.3   |   1.2
+ Coen, Joel            |   17.6% |    17 |        3 |   8.2       |   14 |   7.3   |   0.9
+ Coen, Ethan           |   17.6% |    17 |        3 |   8.2       |   14 |   7.3   |   0.9
+ Zemeckis, Robert      |   14.3% |    14 |        2 |   8.7       |   12 |   7.1   |   1.6
+ Howard, Ron (I)       |   18.2% |    11 |        2 |   8.2       |    9 |   7.0   |   1.2
+ Scott, Ridley         |   18.8% |    16 |        3 |   8.4       |   13 |   6.9   |   1.5
+ Stone, Oliver (I)     |    9.1% |    11 |        1 |   8.1       |   10 |   6.8   |   1.3
+ Rodriguez, Robert (I) |    9.1% |    11 |        1 |   8.1       |   10 |   6.8   |   1.3
+(15 rows)

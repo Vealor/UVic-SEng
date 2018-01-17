@@ -1,0 +1,19 @@
+/* Generics */
+//
+
+
+List l = new ArrayList();
+
+//new syntax:
+List<String> l = new LinkedList<String>();
+List<Strudent> l2 = new LinkedList<String>();
+List<int> l3 = XXXXX NO
+//FINAL EXAM:!!!!!
+// NO PRIMITIVE TYPES IN GENERIC FORM
+	//although:
+	List<Integer> l4 = _______;
+	Integer i=7;
+	used to have to do Integer i = new Integer(7);
+	//Only in the case with big I Integer
+	
+// can NOT make a generic type array

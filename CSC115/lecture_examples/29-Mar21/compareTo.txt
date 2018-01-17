@@ -1,0 +1,8 @@
+Color c1 = new color (RED);
+Color c2 = new color (BLUE);
+
+int x = cl.compareTo(c2);
+
+// x  < 0 if c1 < c2
+// x == 0 if c1 == c2
+// x  > 0 if c1 > c2

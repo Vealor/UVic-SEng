@@ -1,0 +1,8 @@
+
+	@public functions
+	.extern		ethernet_init
+	.extern		ethernet_reset
+	.extern		ethernet_close
+	.extern		ethernet_output
+	.extern		ethernet_input
+	

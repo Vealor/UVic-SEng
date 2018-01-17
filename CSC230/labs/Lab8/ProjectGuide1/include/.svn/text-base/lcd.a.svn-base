@@ -1,0 +1,20 @@
+
+	.equ	SCR_XSIZE,		320
+	.equ	SCR_YSIZE,		240
+
+	@screen color
+	.equ	MODE_MONO, 			1
+	.equ	MODE_GREY4,			4
+	.equ	MODE_GREY16,	 	16
+	.equ	MODE_COLOR, 		256
+
+	@public functions
+	.extern	lcd_init
+	.extern	lcd_drawString
+	.extern	lcd_clrChar
+	.extern	lcd_clrLine
+	.extern	lcd_drawChar
+	.extern lcd_drawInteger
+	.extern lcd_clrScreen
+	.extern lcd_clrLine
+	

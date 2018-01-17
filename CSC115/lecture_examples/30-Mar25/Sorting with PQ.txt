@@ -1,0 +1,29 @@
+/* Sorting N elements using a priority queue */
+	=> add N elements to the priority queue
+	=> repeatedly call remove min until the PQ is empty
+	
+	insert (1), (13), (8), (9), (4)
+	remove(min) gives => 1, 4, 8, 9, 13
+		which, in fact sorts it!
+Runtimes:
+		Linked List		Heap	
+insert		O(1)			O(logN)
+removeMin	O(N)			O(logN)
+*****Need to know how to justify O(logN)!!!
+	are complete trees and know that the height of a complete tree
+	is bounded by the alborithm log N which is based on the height of the
+	tree and the number of elements in the tree.
+	
+	
+Sorting N elements:
+Linked List:
+	N * O(1)
+	   +	=> O(N^2)
+	N * O(N)
+	
+Heap:
+	N * O(logN)
+	   +	   => O(NlogN)
+	N * O(logN)
+	
+	

@@ -1,0 +1,41 @@
+/* are you good with hashing? */
+
+in order to get expected constant time performance from hashing: normally O(N)!
+	1- a "good" hash function
+		ex: (not a good one)!!
+			int hash(object o){
+				return 1;
+			}
+		ex: (GOOD one)
+			-> distributes keys as evenly as possible over the 
+			   possible hash values
+			   
+	2- the has table has to maintain a load factor 'lambda' appropriate for
+	   the implementation
+	   	'lambda' = N / table size
+	   	
+	   open addressing  	'lambda' < 0.5
+	   separate chaining	'lambda' < a small constant c
+	   	-c is (relatively) constant with respect to the number of 
+	   	 elements in the table (N)
+	   	 
+	   	 
+	   	 
+	   	 
+Consider:
+	A separate chaining that contains balanced binary trees
+		using AVL, red-black tree
+	using balanced trees, will be O(logN)
+	
+	1  has balanced tree
+	2
+	3
+	4  has balanced tree
+	5
+	6
+	7  has balanced tree
+	8
+	.
+	.
+	.
+	

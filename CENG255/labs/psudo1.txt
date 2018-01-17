@@ -1,0 +1,50 @@
+/*
+* File: main.s
+*/
+##############################################################
+# Data Section starts here
+##############################################################
+.data
+Primearray: .space 25
+###############################################################
+# End of data section
+###############################################################
+#
+###############################################################
+	.text
+	.global 	_main
+_main:
+	link a6,#0
+	
+			moveq	#3,d2			# i=3
+			moveq	#0,d0			# n=0
+			
+	for1:		cmp.l	#20,d0			# Compare (n-20)
+			bge.s	endfor1			# n-20 <0?
+			moveq	#1,d4			# Prime=1
+			moveq	d2/#2,d3		# Limit = i/2
+			
+			
+			moveq	#2,d1			# j=2
+	for2:		cmp.l	d3,d1			# Compare (j-Limit)
+			bge.s	endfor2			# j-Limit <0?
+
+		if1:	divu	d2,d1			# divides the contents of reginster d2 by d1
+							# and stores the divident, and remainder in the 2 memory slots.
+			cmp.l	d1,#0			# compares modulus value to zero			
+			bee.s	endif1			# if value is equal to zero it ends if statement
+			moveq	#0,d4			# Prime=0
+			bra.s	endfor2
+		endif1:	
+			addq.l	#1,d1			# j++
+	endfor2:	
+		if2:	
+			cmp.l	d4,#0			#comparing contens of d4 to zero 
+			bee.s	endif2
+			add.l	#1,d0			# 
+			move.l	d2,Primearray		# moves prime number into the array	
+	endif2:
+			addq.l	#2,d2			# i+=2
+			bra.s	for1
+	endfor1:
+				 

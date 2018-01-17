@@ -1,0 +1,34 @@
+/* Inheritance */
+
+class SpaceShip{
+}
+class Student{
+}
+----------------same as:
+class SpaceShip extends Object{
+}
+class Student extends Object{
+}
+
+EVERY class in Java is a(n) object!
+
+
+Object:
+	boolean equals(Object o)
+	int hashCode()
+	String toString()
+	
+class car extends Object{
+}
+	Car c = new Car();
+	System.out.println(c.toString());
+------------------------------
+
+public class List<T> {
+}
+List<Integer> l = new List.....
+----used to be:
+List l = new List();
+class List{
+	add(Object o);
+}

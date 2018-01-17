@@ -1,0 +1,147 @@
+%/////////////////////////////////////////////////////////%
+%//                        PREAMBLE                     //%
+%/////////////////////////////////////////////////////////%
+\documentclass[10pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%       Packages
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Fonts and Symbols
+%% --------------------------
+\usepackage{
+    amsmath,            % math operators
+    amssymb,            % math symbols
+    textcomp,           % Copyright and Registered symbols
+    pifont,             % Includes the pretty cirled numbers
+    stmaryrd,			% Arrows
+}
+%% Graphics
+%% --------------------
+\usepackage{
+    graphicx,            % allows insertion of images
+    subfigure,           % allows subfigures (a), (b), etc.
+    tikz,				% allows drawing shapes and whatnotS
+}                
+\graphicspath{ {graphics/} }    % (graphicx) relative path to graphics folder    
+%% Tables
+%% --------------------------
+\usepackage{
+    booktabs,            % better tables, discourages vertical rulings
+    multicol,            % allow multi columns
+    tabularx,            % variable-width columns
+}
+%% Layout Alteration
+%% --------------------------
+\usepackage{            
+    geometry,            % change the margins for specific PAGES
+    parskip,             % no indenting on paras with a line between paras
+    fancyhdr,            % fancy headers and footers
+}
+\geometry{               % specify page size options for (geometry)
+    letterpaper,         % paper size
+    margin=1in,			% specified independently with hmargin vmargin
+}    
+%% Units
+%% --------------------------
+\usepackage{
+    siunitx,             % has S (decimal align) column type
+}
+\sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
+    group-digits  = false, % no grouping of digits
+    %         load-configurations = abbreviations,
+    %         per-mode = symbol,
+}
+%% Misc
+%% --------------------------
+\usepackage{
+    pdfpages,            % import pdfs into this document
+    url,                % allows urls to be added to document
+    amssymb,
+    amsmath,
+    listings,
+}
+%/////////////////////////////////////////////////////////%
+%//                        BODY                         //%
+%/////////////////////////////////////////////////////////%
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%       Title Section
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\pagenumbering{gobble}        % turn off page numbering  
+	\begin{center}
+		\begin{tabularx}{\textwidth}{>{\raggedright}X>{\setlength\hsize{1\hsize}\centering}X>{\raggedleft}X}     
+			CEng 355            &    {\huge Assignment 5 }            &    Jakob Roberts\tabularnewline
+			&    {\small  }              		  &    v00484900\tabularnewline
+		\end{tabularx}    
+	\end{center}  
+	%%%%%%%%%%%%%%%%%%%%%%%
+	% 	  Body
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\vspace{10mm}
+	\renewcommand{\arraystretch}{1.6}
+	\section*{1}
+	\begin{itemize}
+		\item []
+		\begin{lstlisting}
+for (p = 0; p < 2; p++) {	
+	for (q = 0; q < 2; q++) {
+		for (i = p*64; i < (p+1)*64; i++) {
+			for (j = q*64; j < (q+1)*64; j++) {
+				Y[i] = Y[i] + A[i][j]*X[j];
+			}
+		}
+	}
+}
+		\end{lstlisting}
+		@p = 0, Y[0:63] is computed in 2 steps.
+		\begin{itemize}
+			\item [1:]
+			use A[0:63][0:63] with X[0:63] @ q=0.
+			\item [2:]
+			use A[0:63][64:127] with X[64:127] @ q=1.
+		\end{itemize}
+		@p = 1, Y[64:127] is computed in 2 steps. 
+		\begin{itemize}
+			\item [1:]
+			use A[64:127][0:63] with X[0:63] @ q=0.
+			\item [2:]
+			use A[64:127][64:127] with X[64:127] @ q=1.
+		\end{itemize}
+		
+		To store A (64x64), 64 x 64 x 4 = 16KB of space\\
+		To store two 128x1 blocks, 2 x 128 x 4 = 1KB of space\\
+		Therefore Cache size should be \textbf{17KB}\\
+	\end{itemize}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%\pagebreak
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{2}
+	\begin{itemize}
+		\item []
+		\textbf{\textit{NOTE: Assume int of size 32bit}}\\\\
+		With N = 256, int size X[256][256] \(\Rightarrow\) 256 x 256 x 4 = 256KB.\\
+		Each row requires \(256\times4=1KB\) of space.\\
+		For the outer loop, per iteration on index i, there are 2 reads and 1 write per row.\\
+		Each row then requires \(3\times256=768\ accesses \).\\\\
+		With 4 x 1KB pages: 4 page faults per 4 rows.\\
+		Fault Rate: \(4/(4\times768)=0.13\%\)\\
+		With 1 x 4KB pages: 1 page faults per 4 rows.\\
+		Fault Rate: \(1/(4\times768)=0.03\%\)\\
+	\end{itemize}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\pagebreak
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{3}
+	\begin{itemize}
+		\item[]
+		\textbf{\textit{NOTE: Assume float of size 32bit}}\\\\
+		With N = 256, float size X[256][256] \(\Rightarrow\) 256 x 256 x 4 = 256KB.\\
+		For first for loop (trace), 256 accesses are done as it computes 1 entry per row along the diagonal.\\
+		For the second nested loops, it is reading every single element in every row.  Because it is doing a read and assign, it will need to access twice per element, therefore 512 times per row.\\
+		Total accesses are 256 from the trace, and 512 per row. \(\Rightarrow\ 256+(256\times512)=131,328\ accesses\)\\\\
+		With 4 x 1KB pages: 256/4=64 page faults from first loop, 256/4=64 page faults from second loops.\\
+		Fault Rate: \((256+256)/131,328=0.3899\%\)\\
+		With 1 x 4KB pages: 256 page faults from first loop, 256 page faults from second loops.\\
+		Fault Rate: \((64+64)/131,328=0.0975\%\)
+	\end{itemize}
+\end{document}

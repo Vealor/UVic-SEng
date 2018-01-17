@@ -1,0 +1,20 @@
+/* Hashing */
+
+		Array		Linked		BST		balanced BST
+Insert		O(N)		O(1)		O(N)		O(logN)
+Find		O(logN)		O(N)		O(N)		O(logN)
+						[expect O(logN)]
+						
+		Hashing
+Insert		O(N)
+Find		O(N)
+		[expect constant time!]
+		
+		
+Hash function:
+	=> mapping from keys to integers
+	=> has to be constant time with respect to the # of elements in the list
+	=> not ususally constant time with respect to teh length of the key **
+	
+	h("jason") => 1
+	h("sue") => 7

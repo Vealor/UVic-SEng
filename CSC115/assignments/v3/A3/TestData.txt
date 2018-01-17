@@ -1,0 +1,17 @@
+2
+Power:
+3.15	17
+Factorial:
+10
+etox:
+1.0	6
+
+Power:
+2.0	21
+Factorial:
+7
+etox:
+1.0	14
+
+
+

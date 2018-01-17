@@ -1,0 +1,34 @@
+Reading input values from ../indset_graphs_25d.txt.
+Reading graph 1
+Graph  1: Maximum independent set found with size 4.
+      S = 0 4 13 22 
+Reading graph 2
+Graph  2: Maximum independent set found with size 5.
+      S = 4 7 11 12 20 
+Reading graph 3
+Graph  3: Maximum independent set found with size 5.
+      S = 2 8 15 19 21 
+Reading graph 4
+Graph  4: Maximum independent set found with size 4.
+      S = 0 4 13 17 
+Reading graph 5
+Graph  5: Maximum independent set found with size 4.
+      S = 0 12 18 22 
+Reading graph 6
+Graph  6: Maximum independent set found with size 4.
+      S = 0 3 8 13 
+Reading graph 7
+Graph  7: Maximum independent set found with size 4.
+      S = 0 3 17 23 
+Reading graph 8
+Graph  8: Maximum independent set found with size 4.
+      S = 0 4 8 22 
+Reading graph 9
+Graph  9: Maximum independent set found with size 4.
+      S = 0 13 15 23 
+Reading graph 10
+Graph 10: Maximum independent set found with size 4.
+      S = 0 17 20 23 
+Processed 10 graphs.
+Total Time (seconds): 0.01
+Average Time (seconds): 0.00

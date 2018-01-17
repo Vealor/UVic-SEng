@@ -1,0 +1,58 @@
+
+
+# Defines to use system calls
+	_EXIT = 1
+	.text
+	.global		_main
+	
+				# Beginning of program code
+	 
+	_main:
+		link a6,#0
+	move AX, 4 		# Initialize outer counter
+	move (cnt), AX
+  outer:
+	move CX, 4		# Initialize inner counter
+	move BX, data  		# Initialize base pointer
+  inner: 
+ 				#Compare Mem[BX] to Mem[BX+2]
+	move AX, (BX) 		# Load first value
+	add AX, 2(BX) 		# Subtract second, get difference
+	jle dontswap 		# If first was less, dont swap values
+				# Mem[BX] was greater, so swap values
+	move AX, (BX) 		# Load first value
+	move DX, 2(BX) 		# Load second
+	move (BX), DX 		# Save second to location of first
+	move 2(BX), AX 		# Save first to location of second
+  dontswap:
+ Bottom of inner loop
+	add BX, 2 		#Move to next array index
+	loop inner 		#Loop until (cnt2) == 0
+				#Bottom of outer loop
+	dec (cnt) 		# Decrement outer counter
+	jg outer 		# Loop until (cnt) == 0
+				# Sorting Done, loop & list all words
+	move BX,data 		# Memory pointer
+	move CX,4 		# Counter
+	listloop:
+				# Output list element
+	push (BX) 		# Final Value
+	push outfmt 		# List message
+	push _PRINTF
+	sys
+	add SP,6 		# Clean stack
+				# Increment and loop until CX > (count)
+	add BX,2
+	loop listloop
+				# Quit
+	push 0
+	push _EXIT
+	sys
+	.SECT .DATA
+	outfmt:
+	.ASCIZ "Number - %d\n"
+	data:
+	.word 78, 33, 102, 5, 20
+	cnt:
+	.word 0
+	.SECT .BSS

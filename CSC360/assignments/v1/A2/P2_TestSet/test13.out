@@ -1,0 +1,31 @@
+0.200   Train  3 is ready to go West
+0.201   Train  3 is ON the main track going West
+0.300   Train  4 is ready to go West
+0.700   Train  7 is ready to go East
+0.800   Train  5 is ready to go East
+1.000   Train  6 is ready to go East
+1.201   Train  3 is OFF the main track after going West
+1.201   Train  7 is ON the main track going East
+1.400   Train  2 is ready to go West
+1.500   Train  8 is ready to go East
+1.600   Train  9 is ready to go West
+1.700   Train  0 is ready to go East
+1.900   Train  1 is ready to go West
+2.101   Train  7 is OFF the main track after going East
+2.102   Train  1 is ON the main track going West
+2.802   Train  1 is OFF the main track after going West
+2.802   Train  0 is ON the main track going East
+3.202   Train  0 is OFF the main track after going East
+3.202   Train  4 is ON the main track going West
+3.502   Train  4 is OFF the main track after going West
+3.502   Train  5 is ON the main track going East
+3.702   Train  5 is OFF the main track after going East
+3.703   Train  2 is ON the main track going West
+3.903   Train  2 is OFF the main track after going West
+3.903   Train  6 is ON the main track going East
+4.303   Train  6 is OFF the main track after going East
+4.303   Train  9 is ON the main track going West
+5.003   Train  9 is OFF the main track after going West
+5.003   Train  8 is ON the main track going East
+5.603   Train  8 is OFF the main track after going East
+

@@ -1,0 +1,55 @@
+0.100   Train 14 is ready to go West
+0.100   Train 14 is ON the main track going West
+0.200   Train 11 is ready to go East
+0.300   Train  9 is ready to go West
+0.400   Train 16 is ready to go West
+0.500   Train 12 is ready to go East
+0.600   Train 15 is ready to go East
+0.700   Train  8 is ready to go East
+0.800   Train  3 is ready to go East
+0.900   Train  6 is ready to go East
+0.900   Train 14 is OFF the main track after going West
+0.901   Train 12 is ON the main track going East
+1.000   Train  1 is ready to go East
+1.100   Train 10 is ready to go West
+1.200   Train  5 is ready to go East
+1.300   Train 13 is ready to go East
+1.400   Train 17 is ready to go East
+1.500   Train  7 is ready to go East
+1.600   Train  0 is ready to go East
+1.700   Train  2 is ready to go West
+1.701   Train 12 is OFF the main track after going East
+1.701   Train 16 is ON the main track going West
+1.800   Train  4 is ready to go West
+2.301   Train 16 is OFF the main track after going West
+2.301   Train 15 is ON the main track going East
+3.001   Train 15 is OFF the main track after going East
+3.002   Train 10 is ON the main track going West
+3.802   Train 10 is OFF the main track after going West
+3.802   Train  3 is ON the main track going East
+4.302   Train  3 is OFF the main track after going East
+4.302   Train  2 is ON the main track going West
+5.203   Train  2 is OFF the main track after going West
+5.203   Train  6 is ON the main track going East
+6.103   Train  6 is OFF the main track after going East
+6.103   Train  4 is ON the main track going West
+6.903   Train  4 is OFF the main track after going West
+6.903   Train  1 is ON the main track going East
+7.704   Train  1 is OFF the main track after going East
+7.704   Train  5 is ON the main track going East
+8.504   Train  5 is OFF the main track after going East
+8.504   Train 17 is ON the main track going East
+9.204   Train 17 is OFF the main track after going East
+9.204   Train  7 is ON the main track going East
+10.104   Train  7 is OFF the main track after going East
+10.105   Train  9 is ON the main track going West
+10.905   Train  9 is OFF the main track after going West
+10.905   Train 11 is ON the main track going East
+11.505   Train 11 is OFF the main track after going East
+11.505   Train  8 is ON the main track going East
+12.205   Train  8 is OFF the main track after going East
+12.205   Train 13 is ON the main track going East
+12.406   Train 13 is OFF the main track after going East
+12.406   Train  0 is ON the main track going East
+12.706   Train  0 is OFF the main track after going East
+

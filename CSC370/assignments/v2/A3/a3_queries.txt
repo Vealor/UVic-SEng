@@ -1,0 +1,121 @@
+#########################################
+## Jakob Roberts
+## CSC370
+## Assignment 3
+#########################################
+	
+####################################################################################
+1.
+SELECT id,character,billing FROM roles WHERE pid IN (SELECT pid FROM persons WHERE lastname = 'Eastwood') AND id IN (SELECT id FROM directors WHERE pid = 'Leone, Sergio (I)');
+
+OR
+
+WITH 
+	per AS (SELECT pid FROM persons WHERE lastname = 'Eastwood'), 
+	dir AS (SELECT id FROM directors WHERE pid = 'Leone, Sergio (I)') 
+SELECT id,character,billing FROM roles WHERE pid IN (SELECT pid FROM per) AND id IN (SELECT id FROM dir);
+
+                   id                    | character | billing 
+-----------------------------------------+-----------+---------
+ Il buono, il brutto, il cattivo. (1966) | Blondie   |       2
+ Per un pugno di dollari (1964)          | Joe       |       1
+ Per qualche dollaro in più (1965)       | Monco     |       1
+(3 rows)
+
+####################################################################################
+2.
+WITH 
+	rate AS (SELECT id,rank FROM ratings WHERE votes >= 50000), 
+	dir AS (SELECT id FROM directors WHERE pid IN (SELECT pid FROM persons WHERE lastname = 'Hitchcock' AND firstname = 'Alfred')) 
+SELECT title,year,rank FROM (rate NATURAL JOIN dir NATURAL JOIN productions);
+
+        title         | year | rank 
+----------------------+------+------
+ Dial M for Murder    | 1954 |  8.2
+ North by Northwest   | 1959 |  8.4
+ Notorious            | 1946 |  8.1
+ Psycho               | 1960 |  8.6
+ Rear Window          | 1954 |  8.6
+ Rebecca              | 1940 |  8.2
+ Rope                 | 1948 |  8.1
+ Strangers on a Train | 1951 |  8.1
+ The Birds            | 1963 |  7.8
+ Vertigo              | 1958 |  8.4
+(10 rows)
+
+####################################################################################
+3.
+WITH 
+	paul AS (SELECT id,character AS paulchar,billing AS paulbilling FROM roles WHERE pid = 'Newman, Paul (I)' AND character !~ '%Himself%*'), 
+	robert AS (SELECT id,character AS robchar,billing AS robbilling FROM roles WHERE pid = 'Redford, Robert (I)' AND character !~ '%*Himself%*'), 
+	idlist AS ((SELECT id FROM paul) INTERSECT (SELECT id FROM robert)) 
+SELECT title,year,rank,paulchar,paulbilling,robchar,robbilling FROM (idlist NATURAL JOIN ratings NATURAL JOIN paul NATURAL JOIN robert NATURAL JOIN productions) WHERE attr IS NULL;
+
+               title                | year | rank |    paulchar    | paulbilling |     robchar      | robbilling 
+------------------------------------+------+------+----------------+-------------+------------------+------------
+ Butch Cassidy and the Sundance Kid | 1969 |  8.2 | Butch Cassidy  |           1 | The Sundance Kid |          2
+ Mickybo and Me                     | 2004 |  7.3 | Butch Cassidy  |             | The Sundance Kid |           
+ The Sting                          | 1973 |  8.4 | Henry Gondorff |           1 | Johnny Hooker    |          2
+(3 rows)
+
+####################################################################################
+4.
+WITH
+	locat   AS (SELECT id,location FROM locations WHERE location = 'Victoria, British Columbia'),
+	epid    AS (SELECT id,episodeof FROM episodes),
+	thejoin AS (SELECT episodeof AS id,location FROM (locat NATURAL JOIN epid))
+SELECT DISTINCT id,year,location FROM (thejoin NATURAL JOIN productions) WHERE year >=2000 AND attr = 'TV-series';
+                 id                  | year |          location          
+-------------------------------------+------+----------------------------
+ "Cedar Cove" (2013)                 | 2013 | Victoria, British Columbia
+ "Improbabilia" (2013)               | 2013 | Victoria, British Columbia
+ "Senior Living on Location" (2012)  | 2012 | Victoria, British Columbia
+ "Spooksville" (2013)                | 2013 | Victoria, British Columbia
+ "Eaux troubles du crime" (2007)     | 2007 | Victoria, British Columbia
+ "World's Most Extreme Homes" (2006) | 2006 | Victoria, British Columbia
+ "Glutton for Punishment" (2007)     | 2007 | Victoria, British Columbia
+ "The Dead Zone" (2002)              | 2002 | Victoria, British Columbia
+(8 rows)
+
+####################################################################################
+5.
+WITH
+	epid    AS (SELECT id FROM episodes WHERE episodeof = '"Hora Marcada" (1986)'),
+	dirlink AS (SELECT DISTINCT pid FROM directors WHERE id IN (SELECT * FROM epid)),
+	thejoin AS (SELECT pid,id,language,attr FROM (directors NATURAL JOIN productions NATURAL JOIN languages)),
+	engdir  AS (SELECT * FROM thejoin WHERE language = 'English' AND attr IS NULL),
+	comb    AS (SELECT * FROM (engdir NATURAL JOIN dirlink)),
+	rnk     AS (SELECT id,rank FROM ratings WHERE id IN (SELECT id FROM thejoin))
+	SELECT pid,id,rank FROM (comb LEFT JOIN rnk USING (id)) ORDER BY rank DESC NULLS LAST, id;
+
+         pid          |                       id                        | rank 
+----------------------+-------------------------------------------------+------
+ Cuarón, Alfonso      | Children of Men (2006)                          |  7.9
+ Cuarón, Alfonso      | Gravity (2013)                                  |  7.9
+ Cuarón, Alfonso      | Harry Potter and the Prisoner of Azkaban (2004) |  7.8
+ Cuarón, Alfonso      | A Little Princess (1995)                        |  7.7
+ Cuarón, Alfonso      | Vengeance Is Mine (1983)                        |  7.4
+ Cuarón, Alfonso      | Paris, je t'aime (2006)                         |  7.3
+ Cuarón, Alfonso      | Sólo con tu pareja (1991)                       |  7.2
+ del Toro, Guillermo  | Hellboy II: The Golden Army (2008)              |    7
+ del Toro, Guillermo  | Pacific Rim (2013)                              |    7
+ del Toro, Guillermo  | Cronos (1993)                                   |  6.8
+ Cuarón, Alfonso      | Great Expectations (1998)                       |  6.8
+ del Toro, Guillermo  | Hellboy (2004)                                  |  6.8
+ del Toro, Guillermo  | Blade II (2002)                                 |  6.7
+ Silva, Batan         | After Darkness (2013)                           |  6.1
+ del Toro, Guillermo  | Mimic (1997)                                    |  5.9
+ Gurrola, Alfredo (I) | Cabalgando con la muerte (1989)                 |  5.7
+ del Toro, Guillermo  | At the Mountains of Madness (????)              |     
+ del Toro, Guillermo  | Crimson Peak (2015)                             |     
+ del Toro, Guillermo  | Hellboy 3 (????)                                |     
+ del Toro, Guillermo  | Pacific Rim 2 (2017)                            |     
+ del Toro, Guillermo  | Pinocchio (????/II)                             |     
+ del Toro, Guillermo  | Saturn and the End of Days (????)               |     
+ Cuarón, Alfonso      | Tales from the Hanging Head (????)              |     
+ del Toro, Guillermo  | The Haunted Mansion (????)                      |     
+ del Toro, Guillermo  | The Witches (????)                              |     
+(25 rows)
+
+
+

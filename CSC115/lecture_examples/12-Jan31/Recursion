@@ -1,0 +1,19 @@
+/* ---- RECURSION ---- */
+
+have to be able to sum everything that is in a liked list for the midterm
+
+int sum()
+{
+	int val = 0;
+	Node p = head;
+	while (p!=null)
+	{
+		val += p.value;
+		p = p.next;
+	}
+	return val;
+}
+
+This is a template for code that looks at everything in a list.
+
+

@@ -1,0 +1,90 @@
+When running the solution with the given input file for testing, 
+a sample output (with its formatting style) would look 
+like the following:
+
+Assignment 2, Fall 2010
+Jean Luc Picard, V00123456
+
+### MATRIX 1 of size: 3 4
+1 2 3 4
+-5 -6 7 8
+9 10 -11 12
+
+Diagonal is:
+1 -6 11
+
+Its Transpose of size 4 3 is:
+1 -5 9
+2 -6 10
+3 7 -11
+4 8 12
+
+Matrix is not square - no testing
+
+### MATRIX 2 of size: 4 5
+1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5
+
+Diagonal is:
+1 2 3 4
+
+Its Transpose of size 5 4 is:
+1 1 1 1
+2 2 2 2
+3 3 3 3
+4 4 4 4
+5 5 5 5
+
+Matrix is not square - no testing
+
+### MATRIX 3 of size: 3 3
+3 2 -1
+2 -5 17
+-1 17 4
+
+Diagonal is:
+3 -5 4
+
+Its Transpose of size 3 3 is:
+3 2 -1
+2 -5 17
+-1 17 4
+
+Matrix is symmetric
+Matrix is not skew symmetric
+
+### MATRIX 4 of size: 3 3
+0 6 4
+-6 0 5
+-4 -5 0
+
+Diagonal is:
+0 0 0
+
+Its Transpose of size 3 3 is:
+0 -6 -4
+6 0 -5
+4 5 0
+
+Matrix is not symmetric
+Matrix is skew symmetric
+
+### MATRIX 5 of size: 3 3
+-1 0 0
+0 -1 0
+0 0 -1
+
+Diagonal is:
+-1 -1 -1
+
+Its Transpose of size 3 3 is:
+-1 0 0
+0 -1 0
+0 0 -1
+
+Matrix is symmetric
+Matrix is not skew symmetric
+
+All done - Bye

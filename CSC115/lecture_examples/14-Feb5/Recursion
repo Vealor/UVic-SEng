@@ -1,0 +1,10 @@
+/* ----- Recursion ----- */
+
+// A recursive method is one that calls itself.
+// In order for a problem to be solved recursively:
+	1- There mist be at ;east pne base case
+		- A part of the problem solved without recursion
+	2- each recursive call must make progress towards the base case
+	3- believe it works
+	
+

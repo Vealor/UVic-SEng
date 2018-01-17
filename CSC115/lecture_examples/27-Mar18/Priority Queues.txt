@@ -1,0 +1,34 @@
+/* Priority Queue */
+-insert
+-removeMax
+-removeMin
+	-know differences between min and max!!!!!
+
+1-Air traffic control:
+	-hightest priority 
+		-is the plane closest to the airport
+	
+-or-
+2- call center
+	-highest priority
+		-call on hold the longest
+		
+ADT priority queue:
+implement:
+	-insert
+	-removeMax
+	-empty(?)
+using arrays or linked list both sorted and unsorted of each type
+
+Runtimes!(O(N)):
+			Array				Linked List
+		Unsorted	Sorted		Unsorted	Sorted
+insert		O(1)		O(N)		O(1)		O(N)
+removeMax	O(N)		O(1)*		O(N)		O(1)
+empty(?)	O(1)		O(1)		O(1)		O(1)
+
+*cannot get full
+
+
+
+

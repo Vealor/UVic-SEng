@@ -1,0 +1,5 @@
+/* abstract */
+means in a method:
+	can't provide an implementation for the method in the class that you're
+	currently in BUT subclasses must provide an implementation else the
+	class itself becomes abstract

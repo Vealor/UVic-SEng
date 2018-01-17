@@ -1,0 +1,40 @@
+
+@PENDING BIT
+@CAUTION:You must clear the pending bit as general special register.
+
+	.equ	BIT_ADC,		(0x1)
+	.equ	BIT_RTC,		(0x1<<1)
+	.equ	BIT_UTXD1,		(0x1<<2)
+	.equ	BIT_UTXD0,		(0x1<<3)
+	.equ	BIT_SIO,		(0x1<<4)
+	.equ	BIT_IIC,		(0x1<<5)
+	.equ	BIT_URXD1,		(0x1<<6)
+	.equ	BIT_URXD0,		(0x1<<7)
+	.equ	BIT_TIMER5,		(0x1<<8)
+	.equ	BIT_TIMER4,		(0x1<<9)
+	.equ	BIT_TIMER3,		(0x1<<10)
+	.equ	BIT_TIMER2,		(0x1<<11)
+	.equ	BIT_TIMER1,		(0x1<<12)
+	.equ	BIT_TIMER0,		(0x1<<13)
+	.equ	BIT_UERR01,		(0x1<<14)
+	.equ	BIT_WDT,		(0x1<<15)
+	.equ	BIT_BDMA1,		(0x1<<16)
+	.equ	BIT_BDMA0,		(0x1<<17)
+	.equ	BIT_ZDMA1,		(0x1<<18)
+	.equ	BIT_ZDMA0,		(0x1<<19)
+	.equ	BIT_TICK,		(0x1<<20)
+	.equ	BIT_EINT4567,	(0x1<<21)
+	.equ	BIT_EINT3,		(0x1<<22)
+	.equ	BIT_EINT2,		(0x1<<23)
+	.equ	BIT_EINT1,		(0x1<<24)
+	.equ	BIT_EINT0,		(0x1<<25)
+	.equ	BIT_GLOBAL,		(0x1<<26)
+
+	@public functions
+	.extern	interrupt_init
+	.extern	interrupt_enable
+	.extern	interrupt_clear_pending
+	.extern interrupt_disable
+	.extern	interrupt_setvector
+	.extern interrupt_clearAll
+		

@@ -1,0 +1,60 @@
+/* Big O Notation */
+// We are interesting in the growth rates of our algorithms.
+
+// As the number of elements/input increases, how 
+   does the number of operations increase?
+
+// Big O isusedful when the input (N) is large
+	We don't care when N is small
+
+	125 N^3 + 2700 N^2 +....
+	only care about the biggest power which is the fastest 
+	growing term in relation to N
+	
+	hence that would be N^3
+	
+// When counting operations we only care about non constant operations
+	(typically loops or recursion)
+	
+	code for miterm (hint hint)
+	
+	for (int i=0;i<N;i++){
+		int x;
+		x = 4*i + N;
+		System.out.println(x);
+	}
+	is O(N)
+	
+	for(int i=1;i<N;i++){
+		for(int j=0;j<N;j++){
+			//constant stuff
+			//
+		}
+	}
+	is O(N^2)
+	
+	for(int i=0;i<N;i++){ //O(N)
+		for(int j=0;j<i;j++){ //Summation,i=1 to N from i = (n(n+1))/2
+			//constant
+		}
+	}
+	is O(N)
+	
+	
+// List of different runtimes
+	O(1)	-constant
+	O(N)	-
+	O(N^a)	-where a is a constant >1
+	O(logN)	-may or may not be on the midterm
+	
+	
+// List ADT		Array		Linked List
+   addFront		O(N)		O(1)
+   addBack		O(N)*		O(1)**
+   get			O(1)		O(N)
+   remove		O(N)		O(N)
+   
+   * If the array can't get full. If the array size is delcared at maximum size
+     then this is O(1).
+   ** Has to have a tail reference
+	

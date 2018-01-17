@@ -1,0 +1,8 @@
+######################################
+## Changes since Lab Demo
+
+In the lab demo, I didn't really have
+anything working other than a basic
+http request.  So now that the code
+is complete, I hope that it meets the
+standards of the TAs.

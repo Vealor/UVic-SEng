@@ -1,0 +1,221 @@
+# Embest IDE Project File, Format Version 1.00
+# WARNING: DO NOT EDIT OR DELETE THIS PROJECT FILE!
+
+<BEGIN> PROJECT_NAME
+ProjectGuide1
+<END>
+
+<BEGIN> CONFIG
+
+	<BEGIN> CPU
+	MODULE=arm7.DLL
+	FAMILY=ARM7
+	FAMILYID=1
+	MEMBER=ARM7
+	MEMBERID=1
+	ENDIAN=0
+	<END>
+
+	<BEGIN> DEBUG
+	LINK=.\debug\ProjectGuide1.elf
+	SYMBOL=
+	SCRIPT=H:\ProjectGuide1\src\ev40boot.cs
+	DOWNLOAD=
+	DOWNLOADADDR=0x0c000000
+	AUTODOWNLOAD=FALSE
+	AUTOSCRIPT=TRUE
+	VERIFY=FALSE
+	USEMEMMAP=FALSE
+	EXECFDOWN=TRUE
+	EXECFENTRY=FALSE
+	<END>
+
+	<BEGIN> REMOTE
+	DEVICE=EasyICEArm7.DLL
+	SPEED=0
+	COMMTYPE=PARALLEL
+	PARALLEL=LPT1
+	<END>
+
+	<BEGIN> DIR
+	SUBDIR=FALSE
+	<END>
+
+<END>
+
+<BEGIN> BUILD_CONFIG
+	CONFIG_DLL=GccArmSettingPage.dll
+	<BEGIN> COMPILE_COMMAND_LINE
+	-gdwarf -c $(SOURCE_FILE) -o.\debug\$(OBJ_FILE)
+	<END>
+	<BEGIN> ASSEMBLE_COMMAND_LINE
+	-gdwarf2 -IH:\ProjectGuide1\include $(SOURCE_FILE) -o.\debug\$(OBJ_FILE)
+	<END>
+	<BEGIN> LINK_COMMAND_LINE
+	arm-elf-ld -TH:\ProjectGuide1\src\ram_ice.ld  -o.\debug\ProjectGuide1.elf $(<44binit.o>OBJ_FILES)
+	<END>
+<END>
+
+<BEGIN> PROJECT_FILES
+
+	<BEGIN> GROUP="Project Source Files"
+		<PROP> GROUP_FILTER="*.c;*.cpp;*.cc;*.cxx;*.s;*.asm"
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\44binit.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\ethernet.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\interrupt.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\keyboard.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\lcd.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\leds.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\ports.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\segment.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\speaker.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\timer.s
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\src\uart.s
+		STATUS=CLOSE
+		<END>
+
+	<END>
+
+	<BEGIN> GROUP="Project Header Files"
+		<PROP> GROUP_FILTER="*.h;*.inl;*.mac;*.inc"
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\arp.h
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\dhcp.h
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\ethernet.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\ethernet.h
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\interrupt.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\ip.h
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\keyboard.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\lcd.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\leds.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\Memcfg.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\option.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\ports.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\segment.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\speaker.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\tftp.h
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\timer.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\types.h
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\uart.a
+		STATUS=CLOSE
+		<END>
+
+		<BEGIN> SOURCE_FILE
+		SOURCE=.\include\packets\udp.h
+		STATUS=CLOSE
+		<END>
+
+	<END>
+
+<END>

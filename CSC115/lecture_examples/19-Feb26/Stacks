@@ -1,0 +1,16 @@
+/* Stacks */
+
+push - pushes an eleement on top of the stack
+pop - remove and return the top element
+isempty - is the stack empty?
+
+ex:
+push 7
+push 2
+push 8
+push 22
+isEmpty? => false
+pop => 22
+pop => 8
+pop => 2
+pop => 7

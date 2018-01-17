@@ -1,0 +1,25 @@
+// Algorithms for Searching
+
+
+//LINEAR SEARCH
+
+// for i = 0 to n-1 or until data is > the list element
+  //     if list element [ i] = data { return true;} 
+// return false
+
+
+
+//BINARY SEARCH
+// - its only an algorithm. . . . Probably need to examine some details. 
+
+public static boolean binarySearch(int[] element, int data) {
+	return binarySearch(element, 0, element.length, data);
+}
+public static boolean binarySearch(int[] element, int start, int end, int data) {
+	
+	if (end - start ==1) return element[start] == data;
+	else {
+		if (data < element[ (end-start)\2]) 
+		    binearySearch(element,0,(end-start)\2,data );
+		else binearySearch(element,(end-start)\2+1,end, data );
+}

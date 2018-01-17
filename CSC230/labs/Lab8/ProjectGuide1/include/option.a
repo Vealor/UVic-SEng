@@ -1,0 +1,39 @@
+/*********************************************************************************************
+* File£º	option.a
+* Author:	embest	
+* Desc£º	S3CEV40 option parameter
+* History:	
+*********************************************************************************************/
+
+#**********OPTIONS*******************************
+.equ 	_ISR_STARTADDRESS,	0xc7fff00		/* GCS6:64M DRAM/SDRAM 	*/
+
+#BUSWIDTH; 16,32
+    	.global		BUSWIDTH
+.equ 	BUSWIDTH,	16
+
+    	.data
+    	.global		BDRAMTYPE
+BDRAMTYPE:	.string		"SDRAM"
+
+#This value has to be TRUE on ROM program.
+#This value has to be FALSE in RAM program.
+    	.global    	PLLONSTART
+.equ	PLLONSTART, 	1
+
+		.global 	PLLCLK
+.equ 	PLLCLK,		64000000
+
+		.ifeq PLLCLK-64000000	
+.equ 	M_DIV,		56		/* Fin=8MHz Fout=64MHz */
+.equ 	P_DIV,		2
+.equ 	S_DIV,		1
+
+@.equ	FIN,	8000000
+.equ	MCLK,	64000000
+@.equ	PLLON,	1
+
+		.endif
+
+#************************************************
+

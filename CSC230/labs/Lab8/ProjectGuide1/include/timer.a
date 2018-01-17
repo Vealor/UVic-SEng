@@ -1,0 +1,6 @@
+
+	.extern	timer_get_time
+	.extern	timer_init
+	.extern	timer_close
+	.extern	timer_delay
+

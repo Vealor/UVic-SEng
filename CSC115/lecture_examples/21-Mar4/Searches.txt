@@ -1,0 +1,28 @@
+List of N elements
+-> not sorted
+	find an element
+	l.find(72);
+		returns position 72 was found at (0, size-1) 
+		or -1 if not found
+		is O(N)
+		for(int i=0;i<length;i++){
+			if(storage[i]==val){
+				return i;
+				}
+				}
+				return -1;
+	
+Binary Search
+-Must be sorted
+	start in center so length/2
+	if greater than middle then can't be in bottom half of list!
+	then continue by splitting in half
+	Each comparison by splitting in half reduces the size by a factor of 2
+	say N=1,000,000 one comparison brings you down to 500,000 etc..
+	means that this is O(logN) !! log is base 2
+	
+	so log(16) = # of times I can divide by 2 and get a result >1
+	16/2, 8/2, 4/2, 2/2, 1 stop.  4 times
+	log(16)=4, 2^4=16    so it is O(logN)
+	
+	

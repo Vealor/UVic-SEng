@@ -1,0 +1,152 @@
+%/////////////////////////////////////////////////////////%
+%//                        PREAMBLE                     //%
+%/////////////////////////////////////////////////////////%
+\documentclass[10pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%       Packages
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Fonts and Symbols
+%% --------------------------
+\usepackage{
+    amsmath,            % math operators
+    amssymb,            % math symbols
+    textcomp,           % Copyright and Registered symbols
+    pifont,             % Includes the pretty cirled numbers
+    stmaryrd,			% Arrows
+}
+%% Graphics
+%% --------------------
+\usepackage{
+    graphicx,            % allows insertion of images
+    subfigure,           % allows subfigures (a), (b), etc.
+    tikz,				% allows drawing shapes and whatnotS
+}                
+\graphicspath{ {graphics/} }    % (graphicx) relative path to graphics folder    
+%% Tables
+%% --------------------------
+\usepackage{
+    booktabs,            % better tables, discourages vertical rulings
+    multicol,            % allow multi columns
+    tabularx,            % variable-width columns
+}
+%% Layout Alteration
+%% --------------------------
+\usepackage{            
+    geometry,            % change the margins for specific PAGES
+    parskip,             % no indenting on paras with a line between paras
+    fancyhdr,            % fancy headers and footers
+}
+\geometry{               % specify page size options for (geometry)
+    letterpaper,         % paper size
+    margin=1in,			% specified independently with hmargin vmargin
+}    
+%% Units
+%% --------------------------
+\usepackage{
+    siunitx,             % has S (decimal align) column type
+}
+\sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
+    group-digits  = false, % no grouping of digits
+    %         load-configurations = abbreviations,
+    %         per-mode = symbol,
+}
+%% Misc
+%% --------------------------
+\usepackage{
+    pdfpages,            % import pdfs into this document
+    url,                % allows urls to be added to document
+    amssymb,
+    amsmath,
+    listings,
+    tikz,
+}
+%/////////////////////////////////////////////////////////%
+%//                        BODY                         //%
+%/////////////////////////////////////////////////////////%
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%       Title Section
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\pagenumbering{gobble}        % turn off page numbering  
+	\begin{center}
+		\begin{tabularx}{\textwidth}{>{\raggedright}X>{\setlength\hsize{1\hsize}\centering}X>{\raggedleft}X}     
+			SEng360            &    {\huge Assignment 4 }            &    Jakob Roberts\tabularnewline
+			&    {\small  }              		  &    v00484900\tabularnewline
+		\end{tabularx}    
+	\end{center}  
+	%%%%%%%%%%%%%%%%%%%%%%%
+	% 	  Body
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\vspace{10mm}
+	\renewcommand{\arraystretch}{1.6}
+	\section*{A}
+	\begin{itemize}
+		\item []
+		\usetikzlibrary{positioning}
+		\begin{tikzpicture}[node distance=3cm]
+		\node(L1AO)                          {$$};
+		\node(L1A)        [below right = 1cm and 7.5cm of L1AO]    {$L_1\alpha$};
+		\node(L1O)        [below right = 1cm and 7.5cm of L1A]      {$$};
+		
+		\node(L2AO)       [below of=L1AO] {$L_2\alpha\omega$};
+		\node(L2A)      [below of=L1A]  {$$};
+		\node(L2O)      [below of=L1O]  {$L_2\omega$};
+		
+		\node(L3AO)       [below of=L2AO] {$L_3\alpha\omega$};
+		\node(L3A)      [below of=L2A]  {$$};
+		\node(L3O)      [below of=L2O]  {$L_3\omega$};		
+		
+		\node(L4AO)       [below of=L3AO] {$$};
+		\node(L4A)      [below of=L3A]  {$L_4\alpha$};
+		\node(L4O)      [below of=L3O]  {$L_4\omega$};		
+		
+		\node(L5AO)       [below of=L4AO] {$$};
+		\node(L5A)      [below of=L4A]  {$L_5\alpha$};
+		\node(L5O)      [below of=L4O]  {$L_5\omega$};			
+		
+		\draw[-](L2AO)		--	(L3AO);
+		\draw[-](L1A)       -- (L4A);
+		\draw[-](L4A)		--	(L5A);
+		\draw[-](L2O)		--	(L3O);
+		\draw[-](L3O)		--	(L4O);
+		\draw[-](L4O)		--	(L5O);
+		
+		\draw[-](L2AO)		--	(L2O);
+		\draw[-](L3AO)		--	(L3O);
+		\draw[-](L3AO)		--	(L4A);
+		
+		\end{tikzpicture}
+	\end{itemize}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%\pagebreak
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{B}
+	\begin{itemize}
+		\item []
+		\begin{tabular}{ | l | l | l |}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{Subject}} & \multicolumn{1}{|c|}{\textbf{Object}} & \multicolumn{1}{c|}{\textbf{Access}} \\ \hline
+			Alice & P2 & None \\ \hline
+			Bob & P2 & Read/Write \\ \hline
+			Ellen & P4 & Write \\ \hline
+			Dave & P5 & Read \\ 
+			\hline
+		\end{tabular}
+	\end{itemize}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%\pagebreak
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{C}
+	\begin{itemize}
+		\item[]
+		\begin{tabular}{| l || l | l | l |}
+			\hline
+			& \multicolumn{1}{c|}{\textbf{Obj1}} & \multicolumn{1}{c|}{\textbf{Obj2}} & \multicolumn{1}{c|}{\textbf{Obj3}} \\ \hline\hline
+			User1 & R & \(\varnothing\) & R \\ \hline
+			User2 & \(\varnothing\) & R & R \\ \hline
+			User3 & R & R & R \\
+			\hline
+		\end{tabular}
+	\end{itemize}
+\end{document}

@@ -1,0 +1,151 @@
+%/////////////////////////////////////////////////////////%
+%//                        PREAMBLE                     //%
+%/////////////////////////////////////////////////////////%
+\documentclass[10pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%       Packages
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Fonts and Symbols
+%% --------------------------
+\usepackage{
+    amsmath,            % math operators
+    amssymb,            % math symbols
+    textcomp,           % Copyright and Registered symbols
+    pifont,             % Includes the pretty cirled numbers
+    stmaryrd,			% Arrows
+}
+%% Graphics
+%% --------------------
+\usepackage{
+    graphicx,            % allows insertion of images
+    subfigure,           % allows subfigures (a), (b), etc.
+    tikz,				% allows drawing shapes and whatnotS
+}                
+\graphicspath{ {graphics/} }    % (graphicx) relative path to graphics folder    
+%% Tables
+%% --------------------------
+\usepackage{
+    booktabs,            % better tables, discourages vertical rulings
+    multicol,            % allow multi columns
+    tabularx,            % variable-width columns
+}
+%% Layout Alteration
+%% --------------------------
+\usepackage{            
+    geometry,            % change the margins for specific PAGES
+    parskip,             % no indenting on paras with a line between paras
+    fancyhdr,            % fancy headers and footers
+}
+\geometry{               % specify page size options for (geometry)
+    letterpaper,         % paper size
+    margin=1in,			% specified independently with hmargin vmargin
+}    
+%% Units
+%% --------------------------
+\usepackage{
+    siunitx,             % has S (decimal align) column type
+}
+\sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
+    group-digits  = false, % no grouping of digits
+    %         load-configurations = abbreviations,
+    %         per-mode = symbol,
+}
+%% Misc
+%% --------------------------
+\usepackage{
+    pdfpages,            % import pdfs into this document
+    url,                % allows urls to be added to document
+}
+%/////////////////////////////////////////////////////////%
+%//                        BODY                         //%
+%/////////////////////////////////////////////////////////%
+
+\begin{document}
+    %%%%%%%%%%%%%%%%%%%%%%%
+    %       Title Section
+    %%%%%%%%%%%%%%%%%%%%%%%
+    \pagenumbering{gobble}        % turn off page numbering  
+    \begin{center}
+        \begin{tabularx}{\textwidth}{>{\raggedright}X>{\setlength\hsize{1\hsize}\centering}X>{\raggedleft}X}     
+        SENG 360            &    {\huge Assignment 3 }            &    Jakob Roberts\tabularnewline
+			                &    {\small  }              		  &    v00484900\tabularnewline
+        \end{tabularx}    
+    \end{center}  
+    %%%%%%%%%%%%%%%%%%%%%%%
+    %       Body
+    %%%%%%%%%%%%%%%%%%%%%%%
+    \vspace{5mm}
+            
+    \section*{Part A}
+ \begin{itemize}
+     \item[a)] This protocol is not susceptible to a reflection attack.  Consider the following:
+
+		\(A \rightarrow B: A, N_{a}\)\\
+		A sends B the nonce and their identifier.
+		
+		\(B \rightarrow A: N_{b},\{A, B, N_{a}\}K_{AB}\)\\
+		In response, B sends back the given nonce with A, itself (B) all encrypted with their shared key.  It also sends a nonce from itself hoping to get an appropriate reply.
+		
+		\(A \rightarrow B: \{A, B, N_{b}\}K_{AB}\)\\
+		After A decrypts the message from B using their shared key, it can see its nonce with itself (A) and B.  It can then respond appropriately with the plaintext nonce it received by returning the message with itself (A), B, and the new nonce all encrypted using their shared key.
+
+     \item[b)] Making the assumption that the protocol were susceptible to reflection attacks, we can modify the encrypted content by simply adding a nonce encrypted under the shared key.
+     
+     \item[c)] There are known plain-text, cypher-text pairs so I would send the nonces initially using the already known shared key.  Once the nonces are sent and authentication happens, I would make sure that everything sent uses the shared key.  Under no circumstances should any messages be sent between A and B in plain text when they have a shared hidden key!
+	\end{itemize}
+    \section*{Part B}
+    \begin{itemize}
+        \item[a)] As Protocol 1 shares a mutual key based on modular prime factorization (by taking "mod p") which is considered hard and a one-way system (trapdoor).  As the shared key is superior to simply exchanging nonces, this is the additional service provided by Protocol 1 over Protocol 2.
+        
+        \item[b)] Assuming that the service being provided is the hardness associated with the trapdoor (modular prime factorization), the hardness of this service must be trusted.  The only way that this service could not be trusted is if we take into consideration that a quantum computer has been created that can break the hardness associated with modular prime factorization.
+        
+        With protocol 1, even if the attacker discovers a, b and p, they would still need to know what g is in order for them to have any chance of breaking the protocol.
+        
+        \item[c)] Assuming the hardness of Protocol 1 is not required, we can use Protocol 2 as it will be a faster computation than trying to compute modular prime factorization.  Taking the XOR of nonce A and nonce B is a very quick calculation and can be used for key establishment if security is not as big of a concern.
+        
+    \end{itemize} 
+    \section*{Part C}
+	\begin{itemize}
+		\item[]
+			\(A \rightarrow B: A, na\)\\
+			\(B \rightarrow S: B, nb, \{A, na\}_{kbs}\)\\
+			\(S \rightarrow A: nb, \{B, k, na\}_{kas}, \{A, k, nb\}_{kbs}\)\\
+			\(A \rightarrow B: \{A, k, nb\}_{kbs},\{nb\}_{k}\)\\
+		\item[a)] 
+			\(A \vDash \# na\)\\
+			\-\hspace{5mm} \(B \rightarrow S: B, nb, \{A, na\}_{kbs}\)\\
+			\(B \vDash \# nb\)\\
+			\(B \vartriangleleft \{A, na\}_{kbs}\)\\
+			\(B \vDash \# na\)\\
+			\-\hspace{5mm} \(S \rightarrow A: nb, \{B, k, na\}_{kas}, \{A, k, nb\}_{kbs}\)\\
+			\(S \vDash \# k\)\\
+			\(S \vartriangleleft \{B, k, na\}_{kas}\)\\
+			\(S \vartriangleleft \{A, k, nb\}_{kbs}\)\\
+			\(S \vDash \# na\)\\
+			\(S \vDash \# nb\)\\
+			Because: \(S \Mapsto k\)\\
+			\(S \Mapsto \{B, k, na\}_{kas}\)\\
+			\(S \Mapsto \{A, k, nb\}_{kbs}\)\\
+			\(A \vartriangleleft \{B, k, na\}_{kas}\)\\
+			\(A \vDash \# k\)\\
+			\-\hspace{5mm} \(A \rightarrow B: \{A, k, nb\}_{kbs},\{nb\}_{k}\)\\
+			\(A \vDash A \overset{k}{\longleftrightarrow} B\)\\
+			\(A \vDash \# A \overset{k}{\longleftrightarrow} B\)	
+		\item[b)]
+			\(B \vartriangleleft \{A, k, nb\}_{kbs}\)\\
+			\-\hspace{5mm} \(A \rightarrow B: \{A, k, nb\}_{kbs},\{nb\}_{k}\)\\
+			\(B \vDash A \overset{k}{\longleftrightarrow} B\)\\
+			\(B \vDash \# nb\)\\
+			\(B \vDash \# k\)\\
+			\(B \vDash \# A \overset{k}{\longleftrightarrow} B\)
+		\item[c)]
+			\(B \vDash A \overset{k}{\longleftrightarrow} B\)\\
+			Because:  \(A \rightarrow B: \{A, k, nb\}_{kbs},\{nb\}_{k}\)\\
+			\(B \vDash A \vDash A \overset{k}{\longleftrightarrow} B\)\\
+			\(B \vartriangleleft \{nb\}_{k}\)\\
+			\(B \vDash A \vDash \# k\)\\
+			\(B \vDash \# k\)\\
+			\(B \vDash A \vDash \# A \overset{k}{\longleftrightarrow} B\)\\
+			
+	\end{itemize}   
+\end{document}

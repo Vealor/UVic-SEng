@@ -1,0 +1,9 @@
+
+	@these define the ID's of the 2 LED lights
+	.equ	LEFT_LED,		0x02
+	.equ	RIGHT_LED,		0x01
+
+
+	@public functions
+	.extern	leds_display
+	.extern	leds_init

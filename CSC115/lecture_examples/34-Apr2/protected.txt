@@ -1,0 +1,6 @@
+/* protected */
+not private
+unable to be used by the outside world
+but, can be used by subclasses!!!
+
+protected is basically equivalent to private unless inheritance is included

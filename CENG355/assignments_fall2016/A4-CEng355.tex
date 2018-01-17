@@ -1,0 +1,199 @@
+%/////////////////////////////////////////////////////////%
+%//                        PREAMBLE                     //%
+%/////////////////////////////////////////////////////////%
+\documentclass[10pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%       Packages
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Fonts and Symbols
+%% --------------------------
+\usepackage{
+    amsmath,            % math operators
+    amssymb,            % math symbols
+    textcomp,           % Copyright and Registered symbols
+    pifont,             % Includes the pretty cirled numbers
+    stmaryrd,			% Arrows
+}
+%% Graphics
+%% --------------------
+\usepackage{
+    graphicx,            % allows insertion of images
+    subfigure,           % allows subfigures (a), (b), etc.
+    tikz,				% allows drawing shapes and whatnotS
+}                
+\graphicspath{ {graphics/} }    % (graphicx) relative path to graphics folder    
+%% Tables
+%% --------------------------
+\usepackage{
+    booktabs,            % better tables, discourages vertical rulings
+    multicol,            % allow multi columns
+    tabularx,            % variable-width columns
+}
+%% Layout Alteration
+%% --------------------------
+\usepackage{            
+    geometry,            % change the margins for specific PAGES
+    parskip,             % no indenting on paras with a line between paras
+    fancyhdr,            % fancy headers and footers
+}
+\geometry{               % specify page size options for (geometry)
+    letterpaper,         % paper size
+    margin=1in,			% specified independently with hmargin vmargin
+}    
+%% Units
+%% --------------------------
+\usepackage{
+    siunitx,             % has S (decimal align) column type
+}
+\sisetup{input-symbols = {()},  % do not treat "(" and ")" in any special way
+    group-digits  = false, % no grouping of digits
+    %         load-configurations = abbreviations,
+    %         per-mode = symbol,
+}
+%% Misc
+%% --------------------------
+\usepackage{
+    pdfpages,            % import pdfs into this document
+    url,                % allows urls to be added to document
+    amssymb,
+    amsmath,
+}
+%/////////////////////////////////////////////////////////%
+%//                        BODY                         //%
+%/////////////////////////////////////////////////////////%
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%       Title Section
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\pagenumbering{gobble}        % turn off page numbering  
+	\begin{center}
+		\begin{tabularx}{\textwidth}{>{\raggedright}X>{\setlength\hsize{1\hsize}\centering}X>{\raggedleft}X}     
+			CEng 355            &    {\huge Assignment 4 }            &    Jakob Roberts\tabularnewline
+			&    {\small  }              		  &    v00484900\tabularnewline
+		\end{tabularx}    
+	\end{center}  
+	%%%%%%%%%%%%%%%%%%%%%%%
+	% 	  Body
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\vspace{10mm}
+	\renewcommand{\arraystretch}{1.6}
+	\section*{1}
+	\begin{itemize}
+		\item [a)]
+		\begin{tabularx}{\textwidth}{cXXc}
+			Tag&word 1&word 0&\\
+		\end{tabularx}			
+		\texttt{		
+			\begin{tabularx}{\textwidth}{c|X|X|c}\cline{2-3}
+				011&[25C]&[258]&Block 0\\ \cline{2-3}
+				010&[094]&[090]&Block 1\\ \cline{2-3}
+				001&[20C]&[208]&Block 2\\ \cline{2-3}
+				&&&Block 3\\ \cline{2-3}
+				&&&Block 4\\ \cline{2-3}
+				&&&Block 5\\ \cline{2-3}
+				&&&Block 6\\ \cline{2-3}
+				&&&Block 7\\ \cline{2-3}
+		\end{tabularx}	} \newline\\
+		Direct-mapped:
+		Miss rate = \(\frac{4}{10}\)
+		
+		\item [b)]
+		\begin{tabularx}{\textwidth}{cXXc}
+			Tag&word 1&word 0&\\
+		\end{tabularx}			
+		\texttt{		
+			\begin{tabularx}{\textwidth}{c|X|X|c}\cline{2-3}
+				011&[25C]&[258]&Set 0\\ \cline{2-3}
+				010&[254]&[250]&Set 0\\ \cline{2-3}
+				001&[20C]&[204]&Set 0\\ \cline{2-3}
+				&&&Set 0\\ \cline{2-3}
+				&&&Set 1\\ \cline{2-3}
+				&&&Set 1\\ \cline{2-3}
+				&&&Set 1\\ \cline{2-3}
+				&&&Set 1\\ \cline{2-3}
+		\end{tabularx}	} \newline\\
+		2-way set-associative:
+		Miss rate = \(\frac{2}{10}\)
+		
+		\pagebreak
+		
+		\item [c)]
+		\begin{tabularx}{\textwidth}{cXXc}
+			Tag&word 1&word 0&\\
+		\end{tabularx}			
+		\texttt{		
+			\begin{tabularx}{\textwidth}{c|X|X|c}\cline{2-3}
+				010011&[09C]&[098]&\\ \cline{2-3}
+				010010&[094]&[090]&\\ \cline{2-3}
+				110010&[254]&[250]&\\ \cline{2-3}
+				101001&[20C]&[204]&\\ \cline{2-3}
+				110011&[25C]&[258]&\\ \cline{2-3}
+				&&&\\ \cline{2-3}
+				&&&\\ \cline{2-3}
+				&&&\\ \cline{2-3}
+		\end{tabularx}	} \newline\\
+		Fully associative:
+		Miss rate = \(\frac{5}{10}\)
+	\end{itemize}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\pagebreak
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{2}
+	\begin{itemize}
+		\item [a)]
+		\begin{tabularx}{\textwidth}{cXXXXXXXXX}
+			\hspace{0.85em}Tag&word 7&word 6&word 5&word 4&word 3&word 2&word 1&word 0&\\
+		\end{tabularx}			
+		\texttt{		
+			\begin{tabularx}{\textwidth}{c|X|X|X|X|X|X|X|X|c}\cline{2-9}
+				00001&[09C]&[098]&[094]&[090]&[08C]&[088]&[084]&[080]&Block 0\\ \cline{2-9}
+				00100&[23C]&[238]&[234]&[230]&[22C]&[228]&[224]&[220]&Block 1\\ \cline{2-9}
+				00100&[25C]&[258]&[254]&[250]&[24C]&[248]&[244]&[240]&Block 2\\ \cline{2-9}
+				&&&&&&&&&Block 3\\ \cline{2-9}
+		\end{tabularx}	} \newline\\
+		Direct-mapped: 2-bit Block = \(A_{6-5}\) \hspace{1em} 3-bit Word = \(A_{4-2}\)\\
+		Miss rate = \(\frac{5}{10}\)
+	
+		\item [b)]
+		\begin{tabularx}{\textwidth}{cXXXXXXXXX}
+			\hspace{0.85em}Tag&word 7&word 6&word 5&word 4&word 3&word 2&word 1&word 0&\\
+		\end{tabularx}			
+		\texttt{		
+			\begin{tabularx}{\textwidth}{c|X|X|X|X|X|X|X|X|c}\cline{2-9}
+				01000&[21C]&[218]&[214]&[210]&[20C]&[208]&[204]&[200]&Set 0\\ \cline{2-9}
+				00010&[09C]&[098]&[094]&[090]&[08C]&[088]&[084]&[080]&Set 0\\ \cline{2-9}
+				01000&[23C]&[238]&[234]&[230]&[22C]&[228]&[224]&[220]&Set 1\\ \cline{2-9}
+				&&&&&&&&&Set 1\\ \cline{2-9}
+		\end{tabularx}	} \newline\\
+		2-way set-associative: 1-bit Set = \(A_{5}\) \hspace{1em} 3-bit Word = \(A_{4-2}\)\\
+		Miss rate = \(\frac{5}{10}\)
+	
+		\item [c)]
+		\begin{tabularx}{\textwidth}{cXXXXXXXXc}
+			\hspace{2.3em}Tag&word 7&word 6&word 5&word 4&word 3&word 2&word 1&word 0&\\
+		\end{tabularx}			
+		\texttt{		
+			\begin{tabularx}{\textwidth}{c|X|X|X|X|X|X|X|X|c}\cline{2-9}
+				0000100&[09C]&[098]&[094]&[090]&[08C]&[088]&[084]&[080]&\\ \cline{2-9}
+				0010000&[25C]&[258]&[254]&[250]&[24C]&[248]&[244]&[240]&\\ \cline{2-9}
+				0010010&[21C]&[218]&[214]&[210]&[20C]&[208]&[204]&[200]&\\ \cline{2-9}
+				0010001&[23C]&[238]&[234]&[230]&[22C]&[228]&[224]&[220]&\\ \cline{2-9}
+		\end{tabularx}	} \newline\\
+		Fully associative: 3-bit Word = \(A_{4-2}\)\\ 
+		Miss rate = \(\frac{4}{10}\)
+	\end{itemize}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\vspace{1.5em}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{3}
+	\begin{itemize}
+		\item[]
+			\( T_{ave} = h_{1}C_{1} + (1 - h_{1}) h_{2} C_{2} + (1 - h_{1})(1 - h_{2})M = 7.2\tau - 4.8h_{2} \)
+		\item[]
+			\( If\ h_{2} = 1\ \ (is\ 100\%\ hit\ rate) \hspace{1em} \overset{then}{\Longrightarrow} \hspace{1em} T_{ave} = 2.4\tau\ \ (min) \)
+		\item[]	
+			\( If\ T_{ave} = 4\tau \hspace{1em} \overset{then}{\Longrightarrow} \hspace{1em} h_{2} = \frac{2}{3}\ \ (66.66\%\ hit\ rate) \)
+		
+	\end{itemize}
+\end{document}

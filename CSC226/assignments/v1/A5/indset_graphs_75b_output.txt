@@ -1,0 +1,34 @@
+Reading input values from ../indset_graphs_75b.txt.
+Reading graph 1
+Graph  1: Maximum independent set found with size 18.
+      S = 0 1 5 6 8 9 10 17 24 28 32 40 42 56 58 60 64 69 
+Reading graph 2
+Graph  2: Maximum independent set found with size 19.
+      S = 0 1 8 11 14 16 17 34 37 42 44 47 50 56 58 59 63 72 73 
+Reading graph 3
+Graph  3: Maximum independent set found with size 18.
+      S = 0 1 4 5 9 12 15 27 35 41 50 60 62 65 66 69 70 72 
+Reading graph 4
+Graph  4: Maximum independent set found with size 18.
+      S = 1 3 8 9 16 32 34 40 43 46 48 49 55 56 60 63 64 69 
+Reading graph 5
+Graph  5: Maximum independent set found with size 18.
+      S = 0 1 4 9 11 27 31 37 38 39 40 47 50 61 64 66 73 74 
+Reading graph 6
+Graph  6: Maximum independent set found with size 18.
+      S = 0 1 2 7 9 13 14 18 22 26 33 43 45 49 60 61 67 70 
+Reading graph 7
+Graph  7: Maximum independent set found with size 18.
+      S = 0 3 4 11 14 16 26 31 35 38 42 43 44 48 51 53 55 73 
+Reading graph 8
+Graph  8: Maximum independent set found with size 18.
+      S = 3 6 10 12 20 21 24 33 36 42 43 46 56 60 65 68 69 73 
+Reading graph 9
+Graph  9: Maximum independent set found with size 18.
+      S = 0 1 2 4 7 8 13 17 19 28 29 31 35 36 38 41 47 55 
+Reading graph 10
+Graph 10: Maximum independent set found with size 18.
+      S = 2 6 14 19 21 28 29 36 40 41 43 46 47 52 62 65 70 74 
+Processed 10 graphs.
+Total Time (seconds): 2.22
+Average Time (seconds): 0.22

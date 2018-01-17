@@ -1,0 +1,37 @@
+/*
+3.5.2
+
+*/
+
+##############################################################
+# Data Section starts here
+##############################################################
+.data
+numfactorial: .short 0x05
+###############################################################
+# End of data section
+###############################################################
+#
+###############################################################
+		.text
+		.global 	_main
+_main:
+		link a6,#0
+
+		moveq 		#0,d0
+	for1:	cmp 		numfactorial, d0
+		beq.s		endfor1
+		move 		d0,-(a7)
+		addq.l		#1,d0
+		bra.s		for1
+	endfor1:
+	for2:	move		(a7)+,d1
+		cmp		#0,d1
+		beq.s		endfor2
+		addq.l		d1,d2
+	endfor2:
+	
+endprog:	bra.s	endprog
+			unlk 	a6	
+			rts
+.end			

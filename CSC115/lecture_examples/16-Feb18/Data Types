@@ -1,0 +1,23 @@
+/* Data Types */
+ADT:
+	no concrete information or any details about it but it is an idea
+	some exaples are lists, queues, trees, etc...
+	Might talk about what the things mean but don't put in any info.
+	
+Data Structure:
+	An exact definition of the method names and details of the structure.
+	Need to know all of the details, it is implemented in a concrete way.
+	
+Instance vs. Static:
+	Instance:
+		Associated with a particular instance of an object.
+		In order to invoke an instance method, you have to have an
+		instance of an object.
+		ex: Student s = new Student("Jason");
+		Then s.getName(); where the "s" is the instance which references
+		the student with the name "Jason".
+	Static:
+		Removed the need to instantiate objects because there is only
+		one of the method that exists. such as: int x = fib(7); where
+		fib is a static method.
+		

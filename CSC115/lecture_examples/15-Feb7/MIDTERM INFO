@@ -1,0 +1,30 @@
+/* THINGS YOU NEED TO KNOW FOR MIDTERM */
+
+1- Explain the difference between primitive data types and references to objects
+	primitive:
+		int
+		float
+		double
+		boolean
+	object:
+		Car
+		Spaceship
+		*String
+		*Integer
+	
+	-> How these things are represented in menory
+	-> Scope!
+2- Create and use arrays including arrays of objects
+3- Know the difference between static and instanced methods
+4- Instantiate objects and know how to invoke instance methods
+5- Know about java interfaces
+	specifically how they relate to abstract data types (for example lists)
+6- know how to be able to write a tester for a java class that "tests" every method
+7- Know how to trace java code
+	draw the boxes and arrows
+	representation of a linked list
+	in-memory pictures 
+	recursive functions
+		write and trace
+8- write something to do with linked lists (100%)
+	(95% chance) will not have seen an example of

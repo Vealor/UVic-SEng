@@ -1,0 +1,240 @@
+
+\documentclass[landscape,dvips,headrule,footrule]{foils}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\setlength{\parindent}{0in}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{boxproof}
+%\usepackage{prooftree}
+%\usepackage{multicol}
+%\usepackage{epic}
+\usepackage[pdftex]{color}
+%\usepackage{color}
+
+\newcommand{\F}{\mathtt{F}}
+\newcommand{\T}{\mathtt{T}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\d}[1]{\textcolor{red}{{\em #1}}}
+\newcommand{\m}[1]{\textcolor{blue}{$#1$}}
+\newcommand{\g}[1]{\textcolor{magenta}{#1}}
+\renewcommand{\r}[1]{\textcolor{red}{#1}}
+\renewcommand{\b}[1]{\textcolor{blue}{#1}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\str}{\{0,1\}^*}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\rand}{\mathsf{rand}}
+\newcommand{\lsb}{\mathsf{lsb}}
+\newcommand{\rshift}{\mathsf{rshift}}
+\newcommand{\fh}[1]{\foilhead[-0.5in]{#1}}
+
+
+
+
+\begin{document}
+
+\MyLogo{Cook-Levin Theorem}
+\leftheader{CSC320}
+%\rightheader{Spring 2003}
+
+\fh{Cook-Levin Theorem}
+
+{\bf Theorem} (Cook 1971, Levin) SAT (in CNF form) is NP-complete
+
+We have already shown that SATISFIABILITY is in NP. So now
+we need to show that for \d{any} language \m{L \in  NP},
+\m{L} can be reduced to SATISFIABILITY
+
+So for, we have only shown reducibilities of a \d{single}
+problem to another. How can we handle all problems in NP?
+
+Give a  \d{generic} reduction, based on nondeterministic TM's:
+\begin{itemize}
+\item For any \m{L \in  NP},
+there must be a polynomial time nondeterministic TM \m{M} 
+which accepts \m{L}.
+\item We will use this fact to show that for any \m{L \in  NP},
+there is a polynomial time reduction \m{f_L} such that for any \m{x},
+\m{x \in L} if and only if \m{f_L(x)} is satisfiable.
+\end{itemize}
+
+\fh{Defining \m{f_L}}
+
+Suppose \m{M = (Q,\Sigma, \Gamma, \delta,q_0,  q_{accept})}, and that \m{p}
+is a polynomial which bounds the running time of \m{M}. Assume
+that \m{p(n) \geq n}.
+
+Suppose that \m{Q} is
+numbered as follows: \m{q_0, q_1, \dots, q_w},
+where \m{q_1=q_{accept}}.
+and that \m{\Gamma} is numbered
+\m{s_0,s_1, \dots s_v},
+where \m{s_0=\sqcup}.
+
+We will number the tape cells \m{\dots,-2,-1,0, 1,2,\dots}. Note that if the
+running time of \m{M} is bounded by \m{p(n)} then we can never
+move right or left from cell \m{0} more than \m{p(n)} times, and so we never need to consider
+tape squares with a number whose absolute value is higher than \m{p(n)}.
+
+We now show how to create \m{f_L(x)} for any instance \m{x} of \m{L}. Let
+\m{n = |x|}. 
+
+\fh{The Variables}
+
+We first specify the set of variables.
+\begin{center}
+\begin{tabular}{c|c|c}
+Variable & Range & Intended meaning\\ \hline
+\m{y_{i,k}}   & \m{1 \le i \le p(n)}    & At time \m{i}, \m{M}\\
+            & \m{0 \le k \le w}       & is in state \m{q_k}\\ \hline
+\m{h_{i,j}}   & \m{1 \le i \le p(n)}    & At time \m{i}, tape\\
+            & \m{-p(n) \le j \le p(n)}  & head is at cell \m{j}\\ \hline
+\m{r_{i,j,k}} & \m{1 \le i \le p(n)}    & At time \m{i}, tape\\
+            & \m{-p(n) \le j \le p(n)}  & cell \m{j} contains\\
+            & \m{0 \le k \le v}       & symbol \m{s_k}
+\end{tabular}
+\end{center}
+\fh{The Clause Groups}
+The clauses come in six groups, each of which impose a constraint
+on satisfying truth assignments which force a legal accepting computation.
+
+\fh{The Clause Groups}
+\begin{tabular}{cl}
+Clause group & \multicolumn{1}{c}{Restriction}\\ \hline
+\m{G_1} & At each time \m{i}, \m{M} is in exactly\\
+      & one state\\
+\m{G_2} & At each time \m{i}, the tape head is \\
+      & on exactly one cell\\
+\m{G_3} & At each time \m{i}, each tape cell \\
+      & contains exactly one symbol\\
+\m{G_4} & At time \m{1}, the computation is in its\\
+      & initial configuration\\
+\m{G_5} & By time \m{p(n)}, \m{M} has entered state \m{q_1}\\
+\m{G_6} & For each time \m{i}, every configuration at\\
+      & time \m{i+1} follows in one step from \\
+      & the configuration at time \m{i},\\
+      & according to \m{\delta}
+\end{tabular}
+
+\fh{Inside the Clause Groups}
+
+We will now take a look inside some of the clause groups.
+For \m{G_1} we need for every \m{i, ~~ 1 \le i \le p(n)} a clause 
+{\color{blue}
+\[
+\{y_{i,0}, y_{i,1}, \dots, y_{i,w}\}
+\]}
+which says that we are in \d{ some state}, and also for every pair
+\m{j,j'}, \m{1 \le j < j' \le w} we need a clause
+{\color{blue}\[
+\{\overline{y_{i,j}},\overline{y_{i,j'}}\}
+\]}
+which says that
+we are not in {\em both} states \m{q_j} and \m{q_{j'}}.
+
+Groups \m{G_2} and \m{G_3} are similar. Group \m{G_5} just contains
+the single clause \m{\{y_{p(n),1}\}}, which says that \m{M} is in the accepting
+state \m{q_1} at time \m{p(n)}.
+
+\fh{Inside Group 4}
+
+\m{G_4} is made up of the following clauses:
+
+\m{\{y_{1,0}\}} - \m{M} starts in state \m{q_0}
+
+\m{\{h_{1,0}\}} - \m{M} starts scanning cell \m{0} 
+
+\m{\{ r_{1,-p(n),0} \} , \{r_{1,-p(n)+1,0}\}, \dots,  \{r_{1, -1, 0}\},}\\
+\m{ \{r_{1,0,k_1}\}, \dots, \{r_{1,n-1,k_n}\},}\\
+\m{\{r_{1,n,0}\}, \dots, \{r_{1,p(n)+1,0}\}}
+
+-The initial tape is  \m{s_{k_1}\dots s_{k_n}} followed
+by \m{\sqcup}'s,
+where \m{x=s_{k_1}s_{k_2}\dots s_{k_n}} 
+
+(NOTE: this last clause is the only one which depends on the
+actual value of \m{x} (compare to the Sudoku encoding!))
+
+\fh{Inside Group 6}
+
+This is the most complicated. Basically we need to say that every
+configuration at step \m{i+1} must follow in one step from a configuration
+at step \m{i}.
+
+First note the following fact about propositional logic: in general,
+an implication of the form
+
+\m{(z_1 \wedge z_2 \wedge \dots \wedge z_k) \rightarrow y}
+
+is equivalent to the clause  \m{\{\overline{z_1},\dots,\overline{z_k},y\}}
+
+\fh{Inside Group 6}
+
+There are two subgroups here. The first just say that at any time
+\m{i}, if cell \m{j} is not being scanned, then it will be \d{unchanged}
+at time \m{i+1}. This is expressed by having the following clauses
+for all \m{i,j,k} where \m{1 \le i < p(n)}, \m{-p(n) \le j \le p(n)}, \m{0 \le k \le v}:
+\m{\{\overline{r_{i,j,k}},h_{i,j},r_{i+1,j,k}\}}
+
+(In implicational form, this is 
+\m{(r_{i,j,k} \wedge \overline{h_{i,j}}) \rightarrow r_{i+1,j,k}})
+
+\fh{Inside Group 6}
+
+The remaining subgroup in \m{G_6} depends on the transition function
+\m{\delta}, e.g., suppose that \m{\delta(q_m,s_k) = 
+\{(q_{m'}, s_{k'}, R)\}}.
+Then we will have the following clauses for all \m{i}, \m{0 \le i \le p(n)}
+and all \m{j}, \m{-p(n) \le j  \le p(n)}:
+
+\m{\{\overline{y_{i,m}},\overline{h_{i,j}},\overline{r_{i,j,k}},y_{i+1,m'}\}}\\
+\m{\{\overline{y_{i,m}},\overline{h_{i,j}},\overline{r_{i,j,k}},h_{i+1,j+1}\}}\\
+\m{\{\overline{y_{i,m}},\overline{h_{i,j}},\overline{r_{i,j,k}},r_{i+1,j,k'}\}}
+
+These again arise from implications, for example the first set from:
+
+\m{(y_{i,m} \wedge h_{i,j} \wedge r_{i,j,k}) \rightarrow y_{i+1,m'}}
+
+What happens if there's more than one choice for \m{\delta}?
+
+
+\fh{More than one choice for transition}
+ Suppose for \m{\delta(q_m,s_k)} there are \m{T} nondeterministic choices. For each possible value of \m{i} and \m{j}, add \m{T} variables   \m{z_{i,j,k,m,1},z_{i,j,k,m,2},\dots,z_{i,j,k,m,T}}
+
+Now add a clause
+
+
+\m{\{\overline{y_{i,m}},\overline{h_{i,j}},\overline{r_{i,j,k}},z_{i,j,k,m,1},z_{i,j,k,m,2},\dots,z_{i,j,k,m,T}\}}
+
+which corresponds to the implication
+
+\m{(y_{i,m} \wedge h_{i,j} \wedge r_{i,j,k}) \rightarrow (z_{i,j,k,m,1} \vee z_{i,j,k,m,2} \vee \dots \vee z_{i,j,k,m,T})}
+
+Finally, for each possible value of \m{i,j,t} add clauses of the form
+\m{\{\overline{z_{i,j,k,m,t}},y_{i+1,m'}\}},
+\m{\{\overline{z_{i,j,k,m,t}},h_{i+1,j'}\}}, and
+\m{\{\overline{z_{i,j,k,m,t}},r_{i+1,j,k'}\}}, where the exact values of \m{m',j'} and \m{k'} depend on the details of the \m{t}th alternative.
+
+\fh{\m{f_L} is Polynomially Bounded}
+
+It is not hard to see that:
+
+\begin{itemize}
+\item The number of clauses in each group is either constant (depends
+only on \m{M}) or polynomial in \m{n = |x|}
+\item The size of any clause is polynomial in \m{n = |x|} (note: all
+clauses except the clause in \m{G_4} which specifies the input have
+a constant number of clauses. Each variable can be encoded with
+polynomial in \m{n} many bits.)
+\end{itemize}
+
+\fh{\m{f_L } is a reduction from \m{L} to SAT}
+
+\begin{itemize}
+\item
+\m{w \in L} iff \m{f_L(w) \in SAT}.
+\end{itemize} 
+This is clear from the definition of the reduction.
+\end{document}        

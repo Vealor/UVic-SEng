@@ -1,0 +1,12 @@
+/* more hashing!! */
+
+hash function
+	-> "good" hash funtion??
+		-> one that distributes the keys uniformly across the 
+		   range of has values
+		
+open address
+	lambda = N/size     *******know for final!
+		N = number of elements in the table
+		size = length of the array
+		lambda needs to be <= 0.5

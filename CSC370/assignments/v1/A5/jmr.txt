@@ -1,0 +1,4 @@
+SELECT id,year,rank,votes
+	FROM directors NATURAL JOIN productions NATURAL LEFT JOIN ratings
+	WHERE attr IS NULL AND pid = $1
+	ORDER BY year,title;

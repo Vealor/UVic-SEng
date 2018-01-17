@@ -1,0 +1,5 @@
+parent <= children -> min heap
+parent >= children -> max heap
+
+-------------------------------------------
+

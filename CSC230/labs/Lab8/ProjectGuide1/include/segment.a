@@ -1,0 +1,16 @@
+
+	@public functions
+	.extern		segment_display
+	.extern		segment_init
+	.extern		segment_digit
+
+	@8Segment display constants
+	@These constants define the 8 segments of the display
+	.equ	SEG_A,		0x80
+	.equ	SEG_B,		0x40
+	.equ	SEG_C,		0x20
+	.equ	SEG_P,		0x10
+	.equ	SEG_D,		0x08
+	.equ	SEG_E,		0x04
+	.equ	SEG_F,		0x02
+	.equ	SEG_G,		0x01

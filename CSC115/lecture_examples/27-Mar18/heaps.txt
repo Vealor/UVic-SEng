@@ -1,0 +1,33 @@
+/* Heap */
+
+-> provide	O(logN) for insert
+		O(logN)	for deleteMax or deleteMin
+		
+->min* or max** headp is a complete binary tree such that for all nodes 
+  n in the tree:
+	-> the valie @  is LESS* or GREATER** than the value at n's children
+	-> n's children are empty or roots of heaps
+	
+a max heap can only exist if it is a complete tree
+
+->with rexpect to N which is the number of nodes in a complete tree, what can 
+  you say about the height of the tree? ---(MUST KNOW FOR FINAL)---
+  	-> N = 2^h -1 for a FULL TREE  h=~ log(N)
+  	-> (in this course) for a complete tree h =~ log(N)
+=> on the exam, there will be NO duplicate keys!!
+
+to represent a heap we use an array
+ignore entry at location 0 and start at 1
+the position of a number is at position 'i'
+to find the parent of a child you take i/2
+to find the left child of a parent it is i*2
+to find the right child of a parent it is i*2+1
+
+need to know:
+	insert
+	delete
+	big O running time
+		-compelte trees
+		-N and h
+		-algorithm follows at most one path from leaf 
+		 to root or root to leaf

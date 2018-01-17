@@ -1,0 +1,20 @@
+/* Heap sort */
+
+sort:
+	blubblesort => O(N^2)
+	insertionsort => O(N^2)
+	
+	array a = {1,2,3,99,56, ...}
+	q => priority q
+	
+	for(i=0;i<a.length;i++){
+		q.insert(a[i]);
+	}
+	for(i=0;i<a.length;i++){
+		System.out.prinln(removeMin());
+	}
+	
+	runtime?:
+		-> O(N^2)    //for linked list implementation
+		-> O(NlogN)  //for heap implementation
+		//depends on implementation of insert!

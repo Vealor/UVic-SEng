@@ -1,0 +1,147 @@
+* Part 1
+
+** Primary keys of main entities
+
+Teams: tname
+Players: pname
+Colours: cname
+Fans: fname
+LeadBy: leadId
+
+** Primary key of relations
+
+PlaysFor: pname
+Captain: it can be pname or tname, let us choose tname 
+hasColors: tname, cname
+fanTeam: fname, tname
+favColor: fname
+in: leadId
+playerLed: leadId 
+captLead: leadId
+
+
+Hence we cambine some tables:
+
+Teams and Captain
+Player and PlaysFor
+Fans and favColor
+LeadBy and its three relations: captLead, in, and playerLed:
+
+
+** Main tables
+
+CREATE TABLE Teams(
+   tname CHAR(30),
+   captain CHAR(30) NOT NULL,
+   PRIMARY KEY (tname),
+   FOREIGN KEY(captain) REFERENCES Players,
+   -- captain one should be UNIQUE, because captains can only be of one team 
+   -- it is double enforced by the FK below
+   UNIQUE(captain),
+-- this one is not required for the assignment, but this enforces that our captain plays 
+-- for the same team
+   FOREIGN KEY(captain, tname) REFERENCES Players(pname, playsFor)
+);
+
+CREATE TABLE Players(
+   pname CHAR(30),
+   playsFor CHAR(30),
+   PRIMARY KEY (pname),
+   FOREIGN KEY(playsFor) REFERENCES Teams
+);
+
+CREATE TABLE Colours(
+   cname CHAR(30),
+   PRIMARY KEY (cname)
+);
+
+CREATE TABLE Fans(
+   fname CHAR(30),
+   favColor CHAR(30) NOT NULL,
+   PRIMARY KEY (fname),
+   FOREIGN KEY(favColor) REFERENCES Colours
+);
+
+** The one converted from relation to entity
+
+CREATE TABLE LeadBy(
+   ledId    integer,
+   captLead VARCHAR(30),
+   playerLed VARCHAR(30),
+   team     VARCHAR(30),
+   PRIMARY KEY(ledId),
+   FOREIGN KEY(captLead, team) REFERENCES Players(pname, playsFor),
+   FOREIGN KEY(playerLed, team) REFERENCES Players(pname, playsFor)
+);
+
+** Relations 
+
+CREATE TABLE fanTeam(
+    fname char(30),
+    tname char(30),
+    PRIMARY KEY(fname, tname),
+    FOREIGN KEY(tname) REFERENCES Teams,
+    FOREIGN KEY(fname) REFERENCES Fans
+);
+
+CREATE TABLE hasColours(
+   tname char(30),
+   cname char(30),
+   PRIMARY KEY(tname, cname),
+   FOREIGN KEY(tname) REFERENCES Teams,
+   FOREIGN KEY(cname) REFERENCES Colours
+);
+
+
+* Part 2
+
+Only relation with a a participation constraint is hasPhone, its PK is phoneNo.
+So we merge hasPhone with Phones.
+
+CREATE TABLE Customers(
+  ssn      CHAR(10),
+  name     CHAR(50),
+  PRIMARY KEY(ssn)
+);
+
+CREATE TABLE Accounts(
+  number   CHAR(10),
+  balance  FLOAT,
+  type     VARCHAR,
+  PRIMARY KEY(number),
+);
+
+CREATE TABLE Owns(
+  ssn   CHAR(10),
+  number CHAR(10),
+  PRIMARY KEY(ssn,number),
+  FOREIGN KEY (ssn) REFERENCES (Customers),
+  FOREIGN KEY (number) REFERENCES (Accounts)
+)
+
+CREATE TABLE Addresses(
+   street   VARCHAR,
+   city     VARCHAR,
+   state    VARCHAR,
+   PRIMARY KEY (street, city, state)
+);
+
+CREATE TABLE hasAddr(
+   street   VARCHAR,
+   city     VARCHAR,
+   state    VARCHAR,
+   ssn      CHAR(10),
+   PRIMARY KEY (ssn,street, city, state),
+   FOREIGN KEY (ssn) REFERENCES (Customers),
+   FOREIGN KEY (street, city, state) REFERENCES (Addressses)
+)
+
+CREATE TABLE Phones(
+   phonenumber char(10),
+   street   VARCHAR,
+   city     VARCHAR,
+   state    VARCHAR,
+   PRIMARY KEY(phonenumber)
+   FOREIGN KEY (street, city, state) REFERENCES (Addressses)
+)
+

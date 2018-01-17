@@ -1,0 +1,10 @@
+
+	@public functions
+	.extern	keyboard_checkBlackKeyAndClear
+	.extern	keyboard_checkBlueKeyAndClear
+	.extern keyboard_close
+	.extern keyboard_clearAll
+
+	@These constants define the ID's of the 2 black buttons	
+	.equ	LEFT_BLACK_BUTTON,	0x02
+	.equ	RIGHT_BLACK_BUTTON,	0x01
