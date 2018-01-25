@@ -1,5 +1,0 @@
-
-	.extern		uart_init
-	.extern		uart_sendByte
-	.extern		uart_sendString
-

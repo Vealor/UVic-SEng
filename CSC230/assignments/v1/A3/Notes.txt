@@ -1,0 +1,56 @@
+Control Flow:---------------------
+If button is pushed for current floor, remain on that floor.
+Do not worry if user pushes up or down, open floor if button is activated.
+emergency == full stop
+** only 4 reqired actions for switching
+
+
+cf2updw example
+check if same floor, then branch out if it is
+......
+
+
+move up example
+branch movingup
+check end of program with black button
+if no signal then main
+else branch to move down (to then call moving down)
+
+movign up
+stmfd sp!, {d3r6, lr
+mov r5 #1
+BL updatedirectionscreen
+Mov r0 left LED
+swi swi setled
+...
+
+
+topfloor
+cmp r6 #topfloor
+bew uprequestdone
+bl checksignalshigher
+
+cmp f0 0
+bne topup
+...
+
+
+ldr r3 = Floornm
+ldr r6 [r3]
+
+PoolMainPW:
+swi swi get tocks
+and r0r0r7
+ldr r1 time0
+str r0[r1]
+RepeatTillTimePW:
+cmp r0 #rightblackbutton
+BLeq EmergencyState
+swi swi checkblack
+smp r0 leftblackbutton
+...
+
+
+
+if key bounce, add another "swi swi_CheckBlue" at the end of the SVAend:
+

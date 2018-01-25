@@ -1,5 +1,0 @@
-
-	@public functions
-	.extern	speaker_init
-	.extern	speaker_beep
-
