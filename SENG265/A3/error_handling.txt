@@ -1,0 +1,46 @@
+===================Error_Handling.txt===================
+# Contains a list of errors that are addressed by the
+# submission or has a suitable strategy that has been
+# suggested to handle them.
+
+---Possible Errors: ---
+1: -if file was not listed on command line
+
+2: -if the file does not exist when grabbing from command line
+
+3: -if one of the formatting parameters is not what it should be
+
+===other errors:
+4: -what if the file is too large for the memory to handle?
+
+5: -what if the file contains special characters such as a copywrite symbol
+	or some other form of non-standard character
+
+6: -if we weren't using python, what if the line was too large than what
+	we were expecting?
+
+7: -if the input to the Formatter class is not what it should be
+
+---Fixes for Errors: ---
+1: -read from stdin
+
+2: -print error for IOError saying that file DNE
+
+3: -prints the parameter as normal text assuming it is part of the file
+
+4: -would have to break it into chunks and evaluate and print each piece at
+	a time assuming the ability to use dynamic memory allocation
+
+5: -would have to use some other character encoding when reading the lines
+	from the file so that the printout would be correct
+
+6: -would have to use dynamic memory allocation to account for the
+	oversized line
+
+7: -need to do a check on the input line in the formatter class to ensure
+	that the input is what is desired, else quit and throw an error
+
+
+
+
+

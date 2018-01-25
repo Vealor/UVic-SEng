@@ -1,3 +1,0 @@
-Here is a sentence with enough
-words to require some sort of
-word wrap.

@@ -1,0 +1,26 @@
+=================================================
+No filename Given:
+	
+	recieve input from stdin
+=================================================
+File can't be opened:
+
+	output error and exit(1);
+=================================================
+Formatted file returned NULL:
+	
+	output error saying file returned
+	no lines and exit(1);
+=================================================
+More than 1 filename entered at command line:
+
+	display error message and exit(1);
+=================================================
+If memory allocation failed:
+
+	print error message and exit(1);
+=================================================
+If word trying to be added to line is too big:
+
+	print error message and exit(1);
+=================================================
