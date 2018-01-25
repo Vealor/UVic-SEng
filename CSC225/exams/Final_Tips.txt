@@ -1,0 +1,24 @@
+Heapsort independent of heap:
+	A=Array
+	P=Priority Queue
+	insert every element of A into P
+	removeMin n times to extract sorted dequence
+	
+	Queue Type 	| 	insert 		| 	removemin	|	Sort
+	Unsorted Array		O(1)			O(n)			O(n^2)		
+	Sorted Array		O(n)			O(1)			O(n^2)
+	Heap			O(logn)			O(logn)			O(nlogn)
+	"Magic Box"		O(loglogn)		O(loglogn)		O(nloglogn)
+	
+	because nloglogn is strictly smaller than nlogn
+	a comparison sorting algorithm MUST take nlogn
+	
+
+
+Master Theorem stuff:
+	T(n)=aT(n/b) + f(n)
+	    =a^logb(n) * T(1) + SUM(f(n/1)
+	    = n^logb(a) * T(1) + SUM(f(n/1)
+	
+
+
